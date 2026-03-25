@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渔场环境控制监测系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: #2196F3; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        .nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .nav-item { background: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; color: #333; border: 2px solid #ddd; transition: all 0.3s; }
+        .nav-item:hover { background: #2196F3; color: white; border-color: #2196F3; }
+        .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .card h2 { color: #2196F3; margin-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .status { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .status.online { background: #4CAF50; color: white; }
+        .status.offline { background: #f44336; color: white; }
+        .data-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .device-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .device-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        .device-card h3 { color: #2196F3; margin-bottom: 10px; }
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .nav { flex-direction: column; }
+            .nav-item { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐟 渔场环境控制监测系统</h1>
+            <p>智能监控 | 预警管理 | 生产记录</p>
+        </div>
+
+        <div class="nav">
+            <a href="/dashboard" class="nav-item">📊 仪表盘</a>
+            <a href="/devices" class="nav-item">📱 设备管理</a>
+            <a href="/alarms" class="nav-item">⚠️ 预警管理</a>
+            <a href="/reminders" class="nav-item">🔔 提醒管理</a>
+            <a href="/production" class="nav-item">🐟 生产记录</a>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📊 系统状态</h2>
+                <div id="systemStatus">检测中...</div>
+            </div>
+
+            <div class="card">
+                <h2>📱 设备概览</h2>
+                <div id="deviceOverview">加载中...</div>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ 预警统计</h2>
+                <div id="alarmStats">加载中...</div>
+            </div>
+
+            <div class="card">
+                <h2>🔔 提醒事项</h2>
+                <div id="reminderList">加载中...</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📈 最新传感器数据</h2>
+            <div id="sensorData">加载中...</div>
+        </div>
+    </div>
+
+    <script>
+        // 自动加载数据
+        async function loadData() {
+            try {
+                const health = await fetch('/api/health').then(r => r.json());
+                document.getElementById('systemStatus').innerHTML = 
+                    `<p>状态: <span class="status ${health.status === 'healthy' ? 'online' : 'offline'}">${health.status}</span></p>
+                     <p>服务: ${health.service || '渔场系统'}</p>`;
+
+                const devices = await fetch('/api/devices').then(r => r.json());
+                let deviceHtml = `<p>共 ${devices.length} 台设备</p><div class="device-grid">`;
+                devices.forEach(device => {
+                    deviceHtml += `
+                        <div class="device-card">
+                            <h3>${device.device_name}</h3>
+                            <p>类型: ${device.device_type_name}</p>
+                            <p>位置: ${device.location}</p>
+                            <p>状态: <span class="status ${device.status ? 'online' : 'offline'}">${device.status ? '在线' : '离线'}</span></p>
+                            <p>当前值: ${device.current_value}</p>
+                        </div>
+                    `;
+                });
+                deviceHtml += '</div>';
+                document.getElementById('deviceOverview').innerHTML = deviceHtml;
+
+                const alarms = await fetch('/api/alarms/records').then(r => r.json());
+                const resolvedCount = alarms.filter(a => a.is_resolved === 1).length;
+                const unresolvedCount = alarms.length - resolvedCount;
+                document.getElementById('alarmStats').innerHTML = `
+                    <p>预警记录: ${alarms.length} 条</p>
+                    <p>已解决: ${resolvedCount} 条</p>
+                    <p>未解决: ${unresolvedCount} 条</p>
+                `;
+
+                const reminders = await fetch('/api/reminders').then(r => r.json());
+                let reminderHtml = '';
+                reminders.slice(0, 3).forEach(reminder => {
+                    const status = reminder.is_completed ? '已完成' : '未完成';
+                    reminderHtml += `
+                        <div class="data-item">
+                            <span>${reminder.title}</span>
+                            <span class="status ${reminder.is_completed ? 'online' : 'offline'}">${status}</span>
+                        </div>
+                    `;
+                });
+                document.getElementById('reminderList').innerHTML = reminderHtml || '<p>暂无提醒事项</p>';
+
+                const sensors = await fetch('/api/sensors').then(r => r.json());
+                let sensorHtml = '';
+                sensors.slice(0, 5).forEach(sensor => {
+                    sensorHtml += `
+                        <div class="data-item">
+                            <span>${sensor.device_name}</span>
+                            <span>温度: ${sensor.temperature || 'N/A'}℃ | PH: ${sensor.ph || 'N/A'}</span>
+                        </div>
+                    `;
+                });
+                document.getElementById('sensorData').innerHTML = sensorHtml || '<p>暂无传感器数据</p>';
+
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                document.getElementById('systemStatus').innerHTML = '<p class="status offline">❌ 连接失败</p>';
+            }
+        }
+
+        // 页面加载时执行
+        loadData();
+        
+        // 每30秒刷新一次数据
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
