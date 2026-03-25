@@ -1,0 +1,332 @@
+2026-03-25 10:05:40 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:05:40 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:06:04 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:06:04 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:06:12 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:06:12 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:06:49 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:06:49 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:06:49 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:06:49 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:06:49 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:06:49 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:08:52 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:08:52 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:08:52 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:09:25 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such table: reminders
+[SQL: SELECT reminders.id AS reminders_id, reminders.title AS reminders_title, reminders.content AS reminders_content, reminders.reminder_time AS reminders_reminder_time, reminders.is_completed AS reminders_is_completed, reminders.completed_at AS reminders_completed_at, reminders.created_at AS reminders_created_at, reminders.updated_at AS reminders_updated_at 
+FROM reminders 
+WHERE reminders.is_completed = ? ORDER BY reminders.reminder_time ASC]
+[parameters: (0,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 10:11:21 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:11:21 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:11:21 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:11:21 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:11:22 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:11:22 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:11:22 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:11:22 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:11:22 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:11:22 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:12:09 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:12:09 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:12:09 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:12:09 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:12:10 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:12:10 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:12:10 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:12:10 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:12:10 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:12:10 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:12:50 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:12:50 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:12:50 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:12:50 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:12:51 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:12:51 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:12:51 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:12:51 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:12:51 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:12:51 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:15:51 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:15:51 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:16:33 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:16:33 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:16:33 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:21:57 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such table: reminders
+[SQL: INSERT INTO reminders (title, content, reminder_time, is_completed, completed_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('测试提醒功能', '验证Reminder CRUD操作是否正常', '2026-03-25 18:00:00.000000', 0, None, '2026-03-25 10:21:57.211599', '2026-03-25 10:21:57.211613')]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 10:25:06 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:25:06 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:25:06 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:25:06 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:25:06 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:25:06 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:25:07 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:25:07 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:25:07 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:25:07 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:25:07 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:25:07 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:25:48 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:25:48 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:27:18 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:27:18 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:30:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:30:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:30:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:30:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:30:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:30:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:30:31 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:30:32 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:30:33 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:30:43 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:30:43 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:30:44 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:30:44 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:30:44 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:31:07 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: BaseModel.__init__() takes 1 positional argument but 2 were given
+2026-03-25 10:32:50 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: BaseModel.__init__() takes 1 positional argument but 2 were given
+2026-03-25 10:33:18 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:33:18 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:34:02 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:34:02 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:34:02 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:34:41 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: BaseModel.__init__() takes 1 positional argument but 2 were given
+2026-03-25 10:35:27 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:35:27 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:35:27 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:35:27 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:35:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:35:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:35:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:35:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:35:29 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:35:30 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:36:01 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:36:01 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:39:19 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:39:19 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:39:19 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:40:52 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: BaseModel.__init__() takes 1 positional argument but 2 were given
+2026-03-25 10:42:21 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:42:21 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:42:21 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:42:21 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:42:22 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:42:22 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:42:22 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:42:22 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:42:22 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:42:22 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:46:00 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:46:00 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:46:00 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:46:00 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:46:01 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:46:01 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:46:01 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:46:01 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:46:01 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:46:01 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 10:46:25 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 10:46:25 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 10:51:08 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 10:51:08 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 10:51:08 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:45:44 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:45:44 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:45:44 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:45:44 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:45:46 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:45:46 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:45:46 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:45:46 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:45:46 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:45:46 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:47:55 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:47:55 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:47:55 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:47:55 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:47:56 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:47:56 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:47:56 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:47:56 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:47:56 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:47:56 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:48:57 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:48:57 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:48:57 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:48:57 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:48:58 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:48:58 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:48:58 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:48:58 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:48:58 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:48:58 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:50:44 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:50:44 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:50:44 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:50:44 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:50:45 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:50:45 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:50:45 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:50:45 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:50:48 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:50:49 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:54:09 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:54:09 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 11:54:09 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:54:09 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 11:54:11 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:54:11 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 11:54:11 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:54:11 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 11:54:11 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:54:11 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 11:58:10 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) attempt to write a readonly database
+[SQL: INSERT INTO reminders (title, content, reminder_time, is_completed, completed_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('水温检查', '检查养殖区水温是否正常', '2026-03-25 14:00:00.000000', 0, None, '2026-03-25 11:58:10.348599', '2026-03-25 11:58:10.348611')]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 11:58:10 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) attempt to write a readonly database
+[SQL: INSERT INTO reminders (title, content, reminder_time, is_completed, completed_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('投喂时间', '下午投喂鱼饲料', '2026-03-25 16:00:00.000000', 0, None, '2026-03-25 11:58:10.372321', '2026-03-25 11:58:10.372330')]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 12:02:23 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'max' is not among the defined enum values. Enum name: alarmlevel. Possible values: REMIND, WARNING, DANGER
+2026-03-25 12:02:23 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: can't subtract offset-naive and offset-aware datetimes
+2026-03-25 12:02:54 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) attempt to write a readonly database
+[SQL: UPDATE alarm_records SET is_resolved=?, resolved_at=? WHERE alarm_records.id = ?]
+[parameters: (1, '2026-03-25 12:02:54.894038', 1)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 12:03:35 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: can't subtract offset-naive and offset-aware datetimes
+2026-03-25 12:08:20 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 12:08:20 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 12:08:20 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 12:08:20 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 12:08:21 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 12:08:21 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 12:08:21 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 12:08:21 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 12:08:22 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 12:08:22 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 12:08:25 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 12:08:25 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 12:08:25 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 12:08:25 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 12:08:27 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 12:08:27 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 12:08:27 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 12:08:27 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 12:08:27 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 12:08:27 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 12:09:37 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 12:09:37 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 12:10:20 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 12:10:20 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 12:10:20 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 12:49:12 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'NoneType' object has no attribute 'strftime'
+2026-03-25 12:49:37 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 12:49:37 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 12:50:27 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 12:50:27 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 12:50:29 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 12:51:12 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such column: sensor_data.raw_value
+[SQL: SELECT devices.id AS devices_id, devices.device_name AS devices_device_name, devices.device_type_id AS devices_device_type_id, devices.location AS devices_location, devices.ip_address AS devices_ip_address, devices.mqtt_topic AS devices_mqtt_topic, devices.status AS devices_status, devices.current_value AS devices_current_value, devices.created_at AS devices_created_at, devices.updated_at AS devices_updated_at, sensor_data.id AS sensor_data_id, sensor_data.device_id AS sensor_data_device_id, sensor_data.temperature AS sensor_data_temperature, sensor_data.ph AS sensor_data_ph, sensor_data.ammonia AS sensor_data_ammonia, sensor_data.nitrite AS sensor_data_nitrite, sensor_data.oxygen AS sensor_data_oxygen, sensor_data.raw_value AS sensor_data_raw_value, sensor_data.created_at AS sensor_data_created_at 
+FROM devices JOIN sensor_data ON devices.id = sensor_data.device_id ORDER BY sensor_data.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (20, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 12:51:12 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'NoneType' object has no attribute 'strftime'
+2026-03-25 12:52:12 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'max' is not among the defined enum values. Enum name: alarmlevel. Possible values: REMIND, WARNING, DANGER
+2026-03-25 13:04:40 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'NoneType' object has no attribute 'strftime'
+2026-03-25 13:25:28 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such column: sensor_data.raw_value
+[SQL: SELECT devices.id AS devices_id, devices.device_name AS devices_device_name, devices.device_type_id AS devices_device_type_id, devices.location AS devices_location, devices.ip_address AS devices_ip_address, devices.mqtt_topic AS devices_mqtt_topic, devices.status AS devices_status, devices.current_value AS devices_current_value, devices.created_at AS devices_created_at, devices.updated_at AS devices_updated_at, sensor_data.id AS sensor_data_id, sensor_data.device_id AS sensor_data_device_id, sensor_data.temperature AS sensor_data_temperature, sensor_data.ph AS sensor_data_ph, sensor_data.ammonia AS sensor_data_ammonia, sensor_data.nitrite AS sensor_data_nitrite, sensor_data.oxygen AS sensor_data_oxygen, sensor_data.raw_value AS sensor_data_raw_value, sensor_data.created_at AS sensor_data_created_at 
+FROM devices JOIN sensor_data ON devices.id = sensor_data.device_id ORDER BY sensor_data.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (20, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 13:25:28 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'max' is not among the defined enum values. Enum name: alarmlevel. Possible values: REMIND, WARNING, DANGER
+2026-03-25 13:25:28 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'NoneType' object has no attribute 'strftime'
+2026-03-25 13:25:59 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:25:59 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:25:59 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:25:59 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:26:00 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:26:00 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:26:00 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:26:00 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:26:01 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:26:01 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:28:21 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:28:21 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:29:57 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:29:57 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:29:57 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:31:00 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such column: sensor_data.raw_value
+[SQL: SELECT devices.id AS devices_id, devices.device_name AS devices_device_name, devices.device_type_id AS devices_device_type_id, devices.location AS devices_location, devices.ip_address AS devices_ip_address, devices.mqtt_topic AS devices_mqtt_topic, devices.status AS devices_status, devices.current_value AS devices_current_value, devices.created_at AS devices_created_at, devices.updated_at AS devices_updated_at, sensor_data.id AS sensor_data_id, sensor_data.device_id AS sensor_data_device_id, sensor_data.temperature AS sensor_data_temperature, sensor_data.ph AS sensor_data_ph, sensor_data.ammonia AS sensor_data_ammonia, sensor_data.nitrite AS sensor_data_nitrite, sensor_data.oxygen AS sensor_data_oxygen, sensor_data.raw_value AS sensor_data_raw_value, sensor_data.created_at AS sensor_data_created_at 
+FROM devices JOIN sensor_data ON devices.id = sensor_data.device_id ORDER BY sensor_data.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (20, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 13:31:00 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'max' is not among the defined enum values. Enum name: alarmlevel. Possible values: REMIND, WARNING, DANGER
+2026-03-25 13:34:54 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:34:54 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:34:54 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:34:54 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:34:56 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:34:56 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:34:56 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:34:56 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:34:56 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:34:56 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:35:41 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:35:41 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:37:15 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:37:15 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:37:15 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:38:06 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such column: sensor_data.raw_value
+[SQL: SELECT devices.id AS devices_id, devices.device_name AS devices_device_name, devices.device_type_id AS devices_device_type_id, devices.location AS devices_location, devices.ip_address AS devices_ip_address, devices.mqtt_topic AS devices_mqtt_topic, devices.status AS devices_status, devices.current_value AS devices_current_value, devices.created_at AS devices_created_at, devices.updated_at AS devices_updated_at, sensor_data.id AS sensor_data_id, sensor_data.device_id AS sensor_data_device_id, sensor_data.temperature AS sensor_data_temperature, sensor_data.ph AS sensor_data_ph, sensor_data.ammonia AS sensor_data_ammonia, sensor_data.nitrite AS sensor_data_nitrite, sensor_data.oxygen AS sensor_data_oxygen, sensor_data.raw_value AS sensor_data_raw_value, sensor_data.created_at AS sensor_data_created_at 
+FROM devices JOIN sensor_data ON devices.id = sensor_data.device_id ORDER BY sensor_data.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (20, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 13:38:06 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: 'str' object has no attribute 'value'
+2026-03-25 13:51:40 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:51:40 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:51:40 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:51:40 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:51:41 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:51:41 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:51:41 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:51:41 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:51:41 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:51:41 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:51:57 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:51:57 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:52:06 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:52:06 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:52:06 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 13:52:36 | ERROR | app.main:global_exception_handler:109 | 未处理的异常: (sqlite3.OperationalError) no such column: sensor_data.raw_value
+[SQL: SELECT devices.id AS devices_id, devices.device_name AS devices_device_name, devices.device_type_id AS devices_device_type_id, devices.location AS devices_location, devices.ip_address AS devices_ip_address, devices.mqtt_topic AS devices_mqtt_topic, devices.status AS devices_status, devices.current_value AS devices_current_value, devices.created_at AS devices_created_at, devices.updated_at AS devices_updated_at, sensor_data.id AS sensor_data_id, sensor_data.device_id AS sensor_data_device_id, sensor_data.temperature AS sensor_data_temperature, sensor_data.ph AS sensor_data_ph, sensor_data.ammonia AS sensor_data_ammonia, sensor_data.nitrite AS sensor_data_nitrite, sensor_data.oxygen AS sensor_data_oxygen, sensor_data.raw_value AS sensor_data_raw_value, sensor_data.created_at AS sensor_data_created_at 
+FROM devices JOIN sensor_data ON devices.id = sensor_data.device_id ORDER BY sensor_data.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (20, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-25 13:53:45 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 13:53:45 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 13:54:02 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 13:54:02 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 13:54:02 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 16:36:26 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 16:36:26 | INFO | app.main:lifespan:57 | 正在关闭应用
+2026-03-25 16:36:26 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 16:36:26 | INFO | app.main:lifespan:59 | 应用已关闭
+2026-03-25 16:36:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 16:36:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 16:36:28 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
+2026-03-25 16:36:28 | INFO | app.main:lifespan:40 | 正在启动 智能渔场环境控制监测系统 v1.0.0
+2026-03-25 16:36:28 | INFO | app.main:lifespan:41 | 运行环境: development
+2026-03-25 16:36:28 | WARNING | app.main:lifespan:52 | MQTT客户端未连接
