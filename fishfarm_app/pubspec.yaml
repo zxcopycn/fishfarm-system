@@ -35,6 +35,10 @@ dependencies:
   uuid: ^4.2.1
   path_provider: ^2.1.1
 
+  # 工具库
+  url_launcher: ^6.1.14
+  share_plus: ^7.2.1
+
   # UI组件
   flutter_slidable: ^3.0.0
   cached_network_image: ^3.3.0

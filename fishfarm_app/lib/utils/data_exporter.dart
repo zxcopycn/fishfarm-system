@@ -47,8 +47,8 @@ class DataExporter {
           _getDeviceName(alarm.deviceId),
           alarm.deviceId?.toString() ?? '',
           alarm.isResolved ? '已解决' : '未解决',
-          _formatDateTime(alarm.createdAt),
-          alarm.resolvedAt != null ? _formatDateTime(alarm.resolvedAt) : ''
+          _formatDateTimeString(alarm.createdAt),
+          alarm.resolvedAt != null ? _formatDateTimeString(alarm.resolvedAt) : ''
         ];
         buffer.writeln(row.join(','));
       }
@@ -106,11 +106,11 @@ class DataExporter {
           record.weight?.toString() ?? '0',
           record.length?.toString() ?? '0',
           record.feedAmount?.toString() ?? '0',
-          record.spawnDate != null ? _formatDateTime(record.spawnDate!) : '',
-          record.hatchDate != null ? _formatDateTime(record.hatchDate!) : '',
+          record.spawnDate != null ? _formatDateTimeString(record.spawnDate!) : '',
+          record.hatchDate != null ? _formatDateTimeString(record.hatchDate!) : '',
           record.growthStage ?? '',
           record.remark ?? '',
-          _formatDateTime(record.createdAt)
+          _formatDateTimeString(record.createdAt)
         ];
         buffer.writeln(row.join(','));
       }
@@ -164,7 +164,7 @@ class DataExporter {
           orElse: () => Device(id: 0, name: '未知设备'),
         );
         final row = [
-          _formatDateTime(data.timestamp),
+          _formatDateTimeString(data.timestamp),
           data.deviceId.toString(),
           device.name,
           data.sensorType,
@@ -223,7 +223,7 @@ class DataExporter {
           device.deviceType,
           device.location,
           device.status,
-          _formatDateTime(device.createdAt)
+          _formatDateTimeString(device.createdAt)
         ];
         buffer.writeln(row.join(','));
       }
@@ -248,11 +248,11 @@ class DataExporter {
 
   // ==================== 私有辅助方法 ====================
 
-  static String _formatDateTime(DateTime dateTime) {
+  static String _formatDateTimeString(DateTime dateTime) {
     return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 
-  static String _formatDateTime(String dateTimeStr) {
+  static String _formatDateTimeString(String dateTimeStr) {
     try {
       final dateTime = DateTime.parse(dateTimeStr);
       return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);

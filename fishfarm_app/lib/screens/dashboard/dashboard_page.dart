@@ -78,7 +78,19 @@ class _DashboardPageState extends State<DashboardPage> {
       final index = _devices.indexWhere((d) => d.id == deviceId);
       if (index != -1) {
         setState(() {
-          _devices[index].status = status;
+          // 由于 Device 的 status 属性是 final，需要重新创建对象
+          _devices[index] = Device(
+            id: _devices[index].id,
+            deviceName: _devices[index].deviceName,
+            deviceTypeId: _devices[index].deviceTypeId,
+            deviceTypeName: _devices[index].deviceTypeName,
+            location: _devices[index].location,
+            ipAddress: _devices[index].ipAddress,
+            mqttTopic: _devices[index].mqttTopic,
+            status: status,
+            currentValue: _devices[index].currentValue,
+            createdAt: _devices[index].createdAt,
+          );
         });
       }
     }

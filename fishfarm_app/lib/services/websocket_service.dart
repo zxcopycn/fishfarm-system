@@ -49,7 +49,7 @@ class WebSocketService {
         onError: (error) {
           print('WebSocket错误: $error');
           _reconnect();
-        ),
+        },
         onDone: () {
           print('WebSocket连接已关闭');
           connectionStatus.value = false;
