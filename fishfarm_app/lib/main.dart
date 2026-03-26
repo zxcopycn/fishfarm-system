@@ -32,6 +32,7 @@ class FishFarmApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
