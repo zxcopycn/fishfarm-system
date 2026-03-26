@@ -248,7 +248,7 @@ class DataExporter {
 
   // ==================== 私有辅助方法 ====================
 
-  static String _formatDateTimeString(DateTime dateTime) {
+  static String _formatDateTimeFrom(DateTime dateTime) {
     return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 

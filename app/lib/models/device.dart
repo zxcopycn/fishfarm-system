@@ -56,6 +56,23 @@ class Device {
   }
 }
 
+class ControlDevice {
+  final int id;
+  final String deviceName;
+  final String deviceType;
+  final String location;
+  final int status;
+  final String? mqttTopic;
+  final double? currentPower;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  ControlDevice({
+    required this.id,
+    required this.deviceName,
+    required this.deviceType,
+    required this.location,
+    required this.status,
     this.mqttTopic,
     this.currentPower,
     required this.createdAt,
@@ -100,4 +117,3 @@ class Device {
     };
   }
 }
-
