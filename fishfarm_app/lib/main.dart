@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'fishfarm_app/lib/screens/login/login_page.dart';
-import 'fishfarm_app/lib/screens/home/home_page.dart';
+import 'screens/login/login_page.dart';
+import 'screens/home/home_page.dart';
 
 class FishFarmApp extends StatelessWidget {
   const FishFarmApp({super.key});

@@ -19,6 +19,11 @@ jobs:
         flutter-version: '3.24.5'
         channel: 'stable'
     
+    - name: 设置工作目录
+      run: |
+        cd fishfarm_app
+        pwd
+    
     - name: 安装依赖
       run: |
         cd fishfarm_app
