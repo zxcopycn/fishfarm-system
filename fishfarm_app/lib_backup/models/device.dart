@@ -56,6 +56,65 @@ class Device {
   }
 }
 
+class SensorData {
+  final int id;
+  final int deviceId;
+  final String? deviceName;
+  final double? temperature; // 温度（℃）
+  final double? ph; // PH值
+  final double? ammonia; // 氨氮（mg/L）
+  final double? nitrite; // 亚盐（mg/L）
+  final double? oxygen; // 溶氧（mg/L）
+  final String? rawValue; // 原始数据
+  final DateTime createdAt;
+
+  SensorData({
+    required this.id,
+    required this.deviceId,
+    this.deviceName,
+    this.temperature,
+    this.ph,
+    this.ammonia,
+    this.nitrite,
+    this.oxygen,
+    this.rawValue,
+    required this.createdAt,
+  });
+
+  factory SensorData.fromJson(Map<String, dynamic> json) {
+    return SensorData(
+      id: json['id'],
+      deviceId: json['device_id'],
+      deviceName: json['device_name'],
+      temperature: json['temperature'],
+      ph: json['ph'],
+      ammonia: json['ammonia'],
+      nitrite: json['nitrite'],
+      oxygen: json['oxygen'],
+      rawValue: json['raw_value'],
+      createdAt: DateTime.parse(json['created_at']),
+    );
+  }
+}
+
+/// 控制设备模型
+class ControlDevice {
+  final int id;
+  final String deviceName;
+  final String deviceType;
+  final String? location;
+  final int status; // 0: 关闭, 1: 开启
+  final String? mqttTopic;
+  final double? currentPower;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  ControlDevice({
+    required this.id,
+    required this.deviceName,
+    required this.deviceType,
+    this.location,
+    required this.status,
     this.mqttTopic,
     this.currentPower,
     required this.createdAt,
