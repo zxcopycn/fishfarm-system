@@ -37,4 +37,3 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const FishFarmApp());
 }
-}
