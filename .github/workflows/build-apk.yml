@@ -19,26 +19,21 @@ jobs:
         flutter-version: '3.24.5'
         channel: 'stable'
     
-    - name: 设置工作目录
-      run: |
-        cd fishfarm_app
-        pwd
-    
     - name: 安装依赖
       run: |
-        cd fishfarm_app
+        cd app
         flutter pub get
     
     - name: 构建APK（Release版）
       run: |
-        cd fishfarm_app
+        cd app
         flutter build apk --release
     
     - name: 上传APK
       uses: actions/upload-artifact@v4
       with:
         name: fishfarm-app-release
-        path: fishfarm_app/build/app/outputs/flutter-apk/app-release.apk
+        path: app/build/app/outputs/flutter-apk/app-release.apk
     
     - name: 构建完成通知
       run: |
