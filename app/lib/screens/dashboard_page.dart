@@ -132,7 +132,7 @@ class _DashboardPageState extends State<DashboardPage> {
             onPressed: _loadData,
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.wifi,
               color: _wsConnected ? Colors.green : Colors.red,
             ),

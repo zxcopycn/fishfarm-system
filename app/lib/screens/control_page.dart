@@ -218,7 +218,7 @@ class _ControlPageState extends State<ControlPage> {
             onPressed: _loadDevices,
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.wifi,
               color: _wsConnected ? Colors.green : Colors.red,
             ),

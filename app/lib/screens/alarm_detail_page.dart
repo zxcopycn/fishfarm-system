@@ -116,7 +116,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
         setState(() {
           _isResolved = true;
           _alarm = _alarm.copyWith(
-            isResolved: true,
+            isResolved: 1,
           );
         });
 
