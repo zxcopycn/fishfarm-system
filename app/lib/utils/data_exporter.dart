@@ -48,7 +48,7 @@ class DataExporter {
           alarm.deviceId?.toString() ?? '',
           alarm.isResolved ? '已解决' : '未解决',
           _formatDateTimeString(alarm.createdAt),
-          alarm.resolvedAt != null ? _formatDateTimeString(alarm.resolvedAt) : ''
+          alarm.updatedAt != null ? _formatDateTimeString(alarm.updatedAt) : ''
         ];
         buffer.writeln(row.join(','));
       }
@@ -252,12 +252,19 @@ class DataExporter {
     return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 
-  static String _formatDateTimeString(String dateTimeStr) {
+  static String _formatDateTimeString(dynamic dateTime) {
     try {
-      final dateTime = DateTime.parse(dateTimeStr);
-      return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
+      DateTime dt;
+      if (dateTime is DateTime) {
+        dt = dateTime;
+      } else if (dateTime is String) {
+        dt = DateTime.parse(dateTime);
+      } else {
+        return dateTime?.toString() ?? '';
+      }
+      return DateFormat('yyyy-MM-dd HH:mm:ss').format(dt);
     } catch (e) {
-      return dateTimeStr;
+      return dateTime?.toString() ?? '';
     }
   }
 
