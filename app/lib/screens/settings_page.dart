@@ -194,7 +194,7 @@ class _SettingsPageState extends State<SettingsPage> {
                (value) => setState(() => _autoRefresh = value),
               icon: const Icon(Icons.refresh)),
             ),
-            if (_autoRefresh) ...[
+            if (_autoRefresh) [
               const SizedBox(height: 16),
               _buildSliderItem(
                 '刷新间隔',
