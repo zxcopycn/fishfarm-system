@@ -86,4 +86,30 @@ class AlarmRecord {
       timeAgo: json['time_ago'] ?? '',
     );
   }
+
+  AlarmRecord copyWith({
+    int? id,
+    int? deviceId,
+    String? deviceName,
+    AlarmLevel? level,
+    double? thresholdValue,
+    double? actualValue,
+    String? message,
+    int? isResolved,
+    DateTime? createdAt,
+    String? timeAgo,
+  }) {
+    return AlarmRecord(
+      id: id ?? this.id,
+      deviceId: deviceId ?? this.deviceId,
+      deviceName: deviceName ?? this.deviceName,
+      level: level ?? this.level,
+      thresholdValue: thresholdValue ?? this.thresholdValue,
+      actualValue: actualValue ?? this.actualValue,
+      message: message ?? this.message,
+      isResolved: isResolved ?? this.isResolved,
+      createdAt: createdAt ?? this.createdAt,
+      timeAgo: timeAgo ?? this.timeAgo,
+    );
+  }
 }

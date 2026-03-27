@@ -7,4 +7,4 @@ import 'alarms_page.dart';
 import 'production_page.dart';
 import 'reminder_list_page.dart';
 import 'settings_page.dart';
-import '../services/api_service.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
-import '../../models/device.dart';
-import '../../services/api_service.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});

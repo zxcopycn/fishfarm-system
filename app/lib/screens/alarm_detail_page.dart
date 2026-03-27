@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/alarm.dart';
-import '../../models/device.dart';
-import '../../services/api_service.dart';
+import 'package:fishfarm_monitor/models/alarm.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
 
 class AlarmDetailPage extends StatefulWidget {
   final AlarmRecord alarm;
@@ -20,7 +20,7 @@ class AlarmDetailPage extends StatefulWidget {
 
 class _AlarmDetailPageState extends State<AlarmDetailPage> {
   bool _isLoading = false;
-  bool _isResolved = widget.alarm.isCompleted;
+  bool _isResolved = widget.alarm.isResolved == 1;
   late AlarmRecord _alarm;
   Device? _device;
   List<AlarmRecord> _historyRecords = [];
@@ -38,7 +38,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
       final devices = await ApiService().getDevices();
       final device = devices.firstWhere(
         (d) => d.id == _alarm.deviceId,
-        orElse: () => Device(id: 0, name: '未知设备'),
+        orElse: () => Device(id: 0, deviceName: '未知设备', deviceTypeId: 0, location: '未知', status: 0, createdAt: DateTime.now()),
       );
       setState(() {
         _device = device;
@@ -78,11 +78,11 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
             const Text('确定要将此预警标记为已解决吗？'),
             const SizedBox(height: 12),
             Text(
-              '预警级别: ${_alarm.alarmLevel}',
+              '预警级别: ${_alarm.level.level}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              '设备: ${_device?.name ?? "未知设备"}',
+              '设备: ${_device?.deviceName ?? "未知设备"}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
@@ -115,8 +115,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
         setState(() {
           _isResolved = true;
           _alarm = _alarm.copyWith(
-            isCompleted: true,
-            resolvedAt: DateTime.now().toIso8601String(),
+            isResolved: 1,
           );
         });
 
@@ -158,8 +157,8 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
     }
   }
 
-  Color _getLevelBgColor(String level) {
-    switch (level) {
+  Color _getLevelBgColor(AlarmLevel level) {
+    switch (level.level) {
       case '提醒':
         return Colors.orange.shade100;
       case '警告':
@@ -224,11 +223,11 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _getLevelBgColor(_alarm.alarmLevel),
+                    color: _getLevelBgColor(_alarm.level),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    _alarm.alarmLevel,
+                    _alarm.level.level,
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -267,7 +266,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
                 ),
                 Text(
                   _isResolved 
-                      ? '解决时间: ${_formatDateTime(_alarm.completedAt)}'
+                      ? '解决时间: ${_formatDateTime(_alarm.createdAt)}'
                       : '创建时间: ${_formatDateTime(_alarm.createdAt)}',
                   style: TextStyle(
                     fontSize: 12,
@@ -313,11 +312,11 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            _buildInfoRow(Icons.device_hub, '设备名称', _device!.name),
-            _buildInfoRow(Icons.tag, '设备编号', _device!.deviceNumber),
-            _buildInfoRow(Icons.category, '设备类型', _device!.deviceType),
+            _buildInfoRow(Icons.device_hub, '设备名称', _device!.deviceName),
+            _buildInfoRow(Icons.tag, '设备编号', '设备_${_device!.id}'),
+            _buildInfoRow(Icons.category, '设备类型', _device!.deviceTypeName ?? '未知类型'),
             _buildInfoRow(Icons.location_on, '安装位置', _device!.location),
-            _buildInfoRow(Icons.status, '设备状态', _device!.status),
+            _buildInfoRow(Icons.info, '设备状态', _device!.status == 1 ? '在线' : '离线'),
           ],
         ),
       ),
@@ -336,13 +335,13 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            _buildInfoRow(Icons.warning, '预警级别', _alarm.alarmLevel),
+            _buildInfoRow(Icons.warning, '预警级别', _alarm.level.level),
             _buildInfoRow(Icons.compare_arrows, '阈值设置', '${_alarm.thresholdValue}'),
             _buildInfoRow(Icons.show_chart, '实际值', '${_alarm.actualValue}'),
             _buildInfoRow(Icons.trending_up, '偏离率', '${_calculateDeviation()}%'),
-            if (_alarm.completedAt != null) ...[
+            if (_alarm.isResolved == 1) ...[
               const SizedBox(height: 8),
-              _buildInfoRow(Icons.check_circle, '解决时间', _formatDateTime(_alarm.completedAt)),
+              _buildInfoRow(Icons.check_circle, '解决时间', _formatDateTime(_alarm.createdAt)),
             ],
           ],
         ),
@@ -394,7 +393,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: _getLevelBgColor(record.alarmLevel),
+          color: _getLevelBgColor(record.level),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Row(
@@ -461,18 +460,18 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
     );
   }
 
-  String _formatDateTime(String? dateTimeStr) {
-    if (dateTimeStr == null) return '未知';
+  String _formatDateTime(DateTime? dateTime) {
+    if (dateTime == null) return '未知';
     try {
-      final dateTime = DateTime.parse(dateTimeStr);
       return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
     } catch (e) {
-      return dateTimeStr;
+      return '未知';
     }
   }
 
   String _calculateDeviation() {
-    if (_alarm.thresholdValue == 0 || _alarm.actualValue == 0) return '0';
-    return (((_alarm.actualValue - _alarm.thresholdValue) / _alarm.thresholdValue * 100).toStringAsFixed(2));
+    if (_alarm.thresholdValue == null || _alarm.actualValue == null) return '0';
+    if (_alarm.thresholdValue == 0) return '0';
+    return (((_alarm.actualValue! - _alarm.thresholdValue!) / _alarm.thresholdValue! * 100).toStringAsFixed(2));
   }
 }

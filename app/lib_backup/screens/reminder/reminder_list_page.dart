@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/reminder.dart';
-import '../../services/api_service.dart';
+import 'package:fishfarm_monitor/models/reminder.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
 
 class ReminderListPage extends StatefulWidget {
   const ReminderListPage({super.key});

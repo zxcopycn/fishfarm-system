@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../dashboard/dashboard_page.dart';
-import '../control/control_page.dart';
-import '../history/history_page.dart';
-import '../alarms/alarms_page.dart';
-import '../production/production_page.dart';
-import '../reminder/reminder_list_page.dart';
-import '../settings/settings_page.dart';
-import '../../services/api_service.dart';
+import 'package:fishfarm_monitor/dashboard/dashboard_page.dart';
+import 'package:fishfarm_monitor/control/control_page.dart';
+import 'package:fishfarm_monitor/history/history_page.dart';
+import 'package:fishfarm_monitor/alarms/alarms_page.dart';
+import 'package:fishfarm_monitor/production/production_page.dart';
+import 'package:fishfarm_monitor/reminder/reminder_list_page.dart';
+import 'package:fishfarm_monitor/settings/settings_page.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

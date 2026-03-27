@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/device.dart';
-import '../../services/api_service.dart';
-import '../../services/websocket_service.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
+import 'package:fishfarm_monitor/services/websocket_service.dart';
 
 class ControlPage extends StatefulWidget {
   const ControlPage({super.key});

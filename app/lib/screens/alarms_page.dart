@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/alarm.dart';
-import '../../services/api_service.dart';
-import '../../services/websocket_service.dart';
+import 'package:fishfarm_monitor/models/alarm.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
+import 'package:fishfarm_monitor/services/websocket_service.dart';
 import 'alarm_detail_page.dart';
 
 class AlarmsPage extends StatefulWidget {
@@ -73,12 +73,15 @@ class _AlarmsPageState extends State<AlarmsPage> {
       _showAlertNotification(
         AlarmRecord(
           id: 0,
+          deviceId: deviceId,
           deviceName: '设备异常',
-          level: '提醒',
+          level: AlarmLevel.fromString('提醒'),
+          thresholdValue: null,
+          actualValue: null,
           message: '设备已停止运行',
-          status: 0,
-          timestamp: DateTime.now(),
-          resolved: false,
+          isResolved: 0,
+          createdAt: DateTime.now(),
+          timeAgo: '刚刚',
         ),
       );
     }
@@ -89,7 +92,7 @@ class _AlarmsPageState extends State<AlarmsPage> {
 
     // 根据预警级别选择颜色
     Color color;
-    switch (alarm.level) {
+    switch (alarm.level.level) {
       case '提醒':
         color = Colors.blue;
         break;
@@ -118,7 +121,7 @@ class _AlarmsPageState extends State<AlarmsPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '⚠️ ${alarm.level}',
+                    '⚠️ ${alarm.level.level}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -150,7 +153,7 @@ class _AlarmsPageState extends State<AlarmsPage> {
             if (mounted) {
               Navigator.of(context).pop();
               setState(() {
-                _filterLevel = alarm.level;
+                _filterLevel = alarm.level.level;
                 _showResolved = false;
               });
               _loadAlarms();
@@ -213,8 +216,8 @@ class _AlarmsPageState extends State<AlarmsPage> {
     }
   }
 
-  Color _getLevelColor(String level) {
-    switch (level) {
+  Color _getLevelColor(AlarmLevel level) {
+    switch (level.level) {
       case '提醒':
         return Colors.orange;
       case '警告':
@@ -226,8 +229,8 @@ class _AlarmsPageState extends State<AlarmsPage> {
     }
   }
 
-  IconData _getLevelIcon(String level) {
-    switch (level) {
+  IconData _getLevelIcon(AlarmLevel level) {
+    switch (level.level) {
       case '提醒':
         return Icons.info;
       case '警告':
@@ -402,7 +405,7 @@ class _AlarmsPageState extends State<AlarmsPage> {
 
   Widget _buildAlarmCard(AlarmRecord alarm) {
     final isResolved = alarm.isResolved == 1;
-    final levelColor = _getLevelColor(alarm.alarmLevel);
+    final levelColor = _getLevelColor(alarm.level);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -442,13 +445,13 @@ class _AlarmsPageState extends State<AlarmsPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
-                          _getLevelIcon(alarm.alarmLevel),
+                          _getLevelIcon(alarm.level),
                           size: 16,
                           color: levelColor,
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          alarm.alarmLevel,
+                          alarm.level.level,
                           style: TextStyle(
                             fontSize: 12,
                             color: levelColor,

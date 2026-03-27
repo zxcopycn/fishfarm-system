@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/device.dart';
-import '../models/sensor_data.dart';
-import '../models/alarm.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/models/sensor_data.dart';
+import 'package:fishfarm_monitor/models/alarm.dart';
 
 class WebSocketService {
   static final WebSocketService _instance = WebSocketService._internal();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/production.dart';
-import '../../services/api_service.dart';
+import 'package:fishfarm_monitor/models/production.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
 
 class ProductionPage extends StatefulWidget {
   const ProductionPage({super.key});

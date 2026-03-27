@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
-import '../../services/api_service.dart';
-import '../../utils/data_exporter.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
+import 'package:fishfarm_monitor/utils/data_exporter.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

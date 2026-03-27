@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/device.dart';
-import '../../services/api_service.dart';
-import '../../services/websocket_service.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
+import 'package:fishfarm_monitor/services/websocket_service.dart';
 
 class ControlPage extends StatefulWidget {
   const ControlPage({super.key});
@@ -79,7 +79,7 @@ class _ControlPageState extends State<ControlPage> {
         SnackBar(
           content: Row(
             children: [
-              Icon(isOn ? Icons.power_on : Icons.power_off, color: Colors.white),
+              Icon(isOn ? Icons.power_settings_new : Icons.power_off, color: Colors.white),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -169,7 +169,7 @@ class _ControlPageState extends State<ControlPage> {
           SnackBar(
             content: Row(
               children: [
-                Icon(action == 'on' ? Icons.power_on : Icons.power_off, color: Colors.white),
+                Icon(action == 'on' ? Icons.power_settings_new : Icons.power_off, color: Colors.white),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(

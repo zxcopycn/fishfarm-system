@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/alarm.dart';
-import '../../models/device.dart';
-import '../../services/api_service.dart';
+import 'package:fishfarm_monitor/models/alarm.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
 
 class AlarmDetailPage extends StatefulWidget {
   final AlarmRecord alarm;

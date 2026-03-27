@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../models/device.dart';
-import '../../models/sensor_data.dart';
-import '../../services/api_service.dart';
-import '../../services/websocket_service.dart';
+import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/models/sensor_data.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
+import 'package:fishfarm_monitor/services/websocket_service.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});

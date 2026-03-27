@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/alarm.dart';
-import '../../services/api_service.dart';
-import '../../services/websocket_service.dart';
+import 'package:fishfarm_monitor/models/alarm.dart';
+import 'package:fishfarm_monitor/services/api_service.dart';
+import 'package:fishfarm_monitor/services/websocket_service.dart';
 import 'alarm_detail_page.dart';
 
 class AlarmsPage extends StatefulWidget {
