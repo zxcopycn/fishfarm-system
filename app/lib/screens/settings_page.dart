@@ -232,7 +232,7 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildSwitchItem(
               '启用通知',
               _notificationsEnabled,
-              onChanged: (value) => setState(() => _notificationsEnabled = value),
+              onChanged: (value) { setState(() => _notificationsEnabled = value); },
               icon: Icon(Icons.notifications,
             ),
             const SizedBox(height: 16),

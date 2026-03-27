@@ -752,7 +752,7 @@ class _ProductionPageState extends State<ProductionPage> {
                 if (_formKey.currentState!.validate()) {
                   try {
                     await ApiService().updateProductionRecord(
-                      record.id,
+                      id: record.id,
                       fishType: _fishTypeController.text.trim(),
                       quantity: double.tryParse(_quantityController.text) ?? 0,
                       weight: double.tryParse(_weightController.text),
