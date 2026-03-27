@@ -254,9 +254,9 @@ class _AlarmsPageState extends State<AlarmsPage> {
             onPressed: _loadAlarms,
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.wifi,
-              color: _wsConnected ? Colors.green : Colors.red,
+              color: Colors.blue,
             ),
             tooltip: 'WebSocket连接状态',
             onPressed: _wsConnected ? null : () {
