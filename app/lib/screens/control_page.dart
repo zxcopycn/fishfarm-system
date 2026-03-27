@@ -313,7 +313,7 @@ class _ControlPageState extends State<ControlPage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                device.deviceIcon,
+                device.Icons.power_settings_new,
                 size: 32,
                 color: isOn ? Colors.green : Colors.grey,
               ),
@@ -329,7 +329,7 @@ class _ControlPageState extends State<ControlPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  device.description,
+                  device.deviceName,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 14,

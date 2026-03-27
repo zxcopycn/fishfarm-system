@@ -20,7 +20,7 @@ class AlarmDetailPage extends StatefulWidget {
 
 class _AlarmDetailPageState extends State<AlarmDetailPage> {
   bool _isLoading = false;
-  bool _isResolved = widget.alarm.isResolved == 1;
+  bool _isResolved = false;
   late AlarmRecord _alarm;
   Device? _device;
   List<AlarmRecord> _historyRecords = [];
@@ -29,6 +29,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
   void initState() {
     super.initState();
     _alarm = widget.alarm;
+    _isResolved = widget.alarm.isResolved == 1;
     _loadDeviceDetails();
     _loadHistoryRecords();
   }
@@ -51,7 +52,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
   Future<void> _loadHistoryRecords() async {
     try {
       final history = await ApiService().getAlarmRecords(
-        isResolved: 1,
+        isResolved: true,
         days: 30,
       );
       setState(() {
@@ -115,7 +116,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
         setState(() {
           _isResolved = true;
           _alarm = _alarm.copyWith(
-            isResolved: 1,
+            isResolved: true,
           );
         });
 

@@ -105,8 +105,8 @@ class _DashboardPageState extends State<DashboardPage> {
       ]);
 
       setState(() {
-        _devices = results[0];
-        _sensorData = results[1];
+        _devices = results[0] as List<Device>;
+        _sensorData = results[1] as List<SensorData>;
         _isLoading = false;
       });
     } catch (e) {

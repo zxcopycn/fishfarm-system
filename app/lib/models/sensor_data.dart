@@ -3,6 +3,7 @@ import 'dart:convert';
 class SensorData {
   final int id;
   final int deviceId;
+  final String? deviceName;
   final double temperature;
   final double ph;
   final double ammonia;
@@ -10,11 +11,13 @@ class SensorData {
   final double oxygen;
   final double humidity;
   final DateTime timestamp;
+  final DateTime createdAt;
   final Map<String, dynamic>? additionalData;
 
   SensorData({
     required this.id,
     required this.deviceId,
+    this.deviceName,
     required this.temperature,
     required this.ph,
     required this.ammonia,
@@ -22,6 +25,7 @@ class SensorData {
     required this.oxygen,
     required this.humidity,
     required this.timestamp,
+    required this.createdAt,
     this.additionalData,
   });
 
@@ -30,6 +34,7 @@ class SensorData {
     return SensorData(
       id: json['id'],
       deviceId: json['device_id'],
+      deviceName: json['device_name'],
       temperature: (json['temperature'] as num).toDouble(),
       ph: (json['ph'] as num).toDouble(),
       ammonia: (json['ammonia'] as num).toDouble(),
@@ -37,6 +42,7 @@ class SensorData {
       oxygen: (json['oxygen'] as num).toDouble(),
       humidity: (json['humidity'] as num).toDouble(),
       timestamp: DateTime.parse(json['timestamp']),
+      createdAt: DateTime.parse(json['created_at'] ?? json['timestamp']),
       additionalData: json['additional_data'],
     );
   }

@@ -101,6 +101,9 @@ class ControlDevice {
     );
   }
 
+  String? get deviceIcon => deviceType;
+  String? get description => deviceName;
+
   bool get isOn => status == 1;
 
   Map<String, dynamic> toJson() {
