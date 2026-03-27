@@ -52,7 +52,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
   Future<void> _loadHistoryRecords() async {
     try {
       final history = await ApiService().getAlarmRecords(
-        isResolved: true,
+        isResolved: 1,
         days: 30,
       );
       setState(() {
@@ -116,7 +116,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
         setState(() {
           _isResolved = true;
           _alarm = _alarm.copyWith(
-            isResolved: true,
+            isResolved: 1,
           );
         });
 

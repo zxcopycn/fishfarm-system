@@ -202,7 +202,7 @@ class _ProductionPageState extends State<ProductionPage> {
                           child: Text('成熟期'),
                         ),
                       ],
-                      onChanged: (value) {
+                       (value) {
                         setDialogState(() => _growthStage = value);
                       },
                     ),
@@ -724,7 +724,7 @@ class _ProductionPageState extends State<ProductionPage> {
                           child: Text('成熟期'),
                         ),
                       ],
-                      onChanged: (value) {
+                       (value) {
                         setDialogState(() => _growthStage = value);
                       },
                     ),

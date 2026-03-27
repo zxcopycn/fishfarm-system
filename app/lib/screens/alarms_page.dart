@@ -338,7 +338,7 @@ class _AlarmsPageState extends State<AlarmsPage> {
             children: [
               Checkbox(
                 value: _showResolved,
-                onChanged: (value) {
+                 (value) {
                   setState(() {
                     _showResolved = value ?? false;
                   });

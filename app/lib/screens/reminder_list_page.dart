@@ -229,7 +229,7 @@ class _ReminderListPageState extends State<ReminderListPage> {
                   ),
                   Switch(
                     value: isCompleted,
-                    onChanged: (value) => _toggleComplete(reminder.id!, value),
+                     (value) => _toggleComplete(reminder.id!, value),
                     activeColor: Colors.blue[700],
                   ),
                 ],

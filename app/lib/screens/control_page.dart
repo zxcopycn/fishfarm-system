@@ -313,7 +313,7 @@ class _ControlPageState extends State<ControlPage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                device.Icons.power_settings_new,
+                Icons.power_settings_new,
                 size: 32,
                 color: isOn ? Colors.green : Colors.grey,
               ),
@@ -347,7 +347,7 @@ class _ControlPageState extends State<ControlPage> {
             ),
             trailing: Switch(
               value: isOn,
-              onChanged: (value) => _toggleDevice(device),
+               (value) => _toggleDevice(device),
               activeColor: Colors.green,
             ),
             onTap: () => _toggleDevice(device),
