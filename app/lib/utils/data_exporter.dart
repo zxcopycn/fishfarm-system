@@ -166,7 +166,7 @@ class DataExporter {
         final row = [
           _formatDateTimeString(data.timestamp),
           data.deviceId.toString(),
-          device.name,
+          device.deviceName,
           data.sensorType,
           data.value.toString(),
           data.unit
@@ -218,7 +218,7 @@ class DataExporter {
       for (final device in devices) {
         final row = [
           device.id.toString(),
-          device.name,
+          device.deviceName,
           device.deviceNumber,
           device.deviceType,
           device.location,

@@ -82,7 +82,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              '设备: ${_device?.name ?? "未知设备"}',
+              '设备: ${_device?.deviceName ?? "未知设备"}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
@@ -313,7 +313,7 @@ class _AlarmDetailPageState extends State<AlarmDetailPage> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            _buildInfoRow(Icons.device_hub, '设备名称', _device!.name),
+            _buildInfoRow(Icons.device_hub, '设备名称', _device!.deviceName),
             _buildInfoRow(Icons.tag, '设备编号', _device!.deviceNumber),
             _buildInfoRow(Icons.category, '设备类型', _device!.deviceType),
             _buildInfoRow(Icons.location_on, '安装位置', _device!.location),
