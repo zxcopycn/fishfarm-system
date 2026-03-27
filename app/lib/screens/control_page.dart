@@ -347,7 +347,7 @@ class _ControlPageState extends State<ControlPage> {
             ),
             trailing: Switch(
               value: isOn,
-               (value) => _toggleDevice(device),
+               onChanged: (value) => _toggleDevice(device),
               activeColor: Colors.green,
             ),
             onTap: () => _toggleDevice(device),
