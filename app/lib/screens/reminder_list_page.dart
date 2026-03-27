@@ -160,7 +160,7 @@ class _ReminderListPageState extends State<ReminderListPage> {
           const SizedBox(width: 8),
           _buildFilterChip('全部', 0, Icons.groups),
           const SizedBox(width: 8),
-          _buildFilterChip('未完成', 1, Icons.todo),
+          _buildFilterChip('未完成', 1, Icons.task_alt),
           const SizedBox(width: 8),
           _buildFilterChip('已完成', 2, Icons.check_circle),
         ],

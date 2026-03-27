@@ -200,7 +200,7 @@ class _HistoryPageState extends State<HistoryPage> {
               child: ChoiceChip(
                 label: Text(type['label'] as String),
                 selected: isSelected,
-                onSelected: (selected) {
+                onSelected: (selected) => {
                   if (selected) {
                     setState(() => _selectedType = type['value'] as String);
                   }
