@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:fishfarm_monitor/models/alarm.dart';
 import 'package:fishfarm_monitor/models/production.dart';
 import 'package:fishfarm_monitor/models/device.dart';
+import 'package:fishfarm_monitor/models/sensor_data.dart';
 
 class DataExporter {
   /// 导出预警记录为CSV
@@ -38,17 +39,17 @@ class DataExporter {
       for (final alarm in alarms) {
         final row = [
           alarm.id,
-          alarm.alarmLevel,
-          alarm.thresholdType,
-          alarm.thresholdValue.toString(),
-          alarm.actualValue.toString(),
+          alarm.level.level,
+          '', // thresholdType 已废弃
+          alarm.thresholdValue?.toString() ?? '0',
+          alarm.actualValue?.toString() ?? '0',
           _calculateDeviation(alarm).toString(),
           alarm.message,
           _getDeviceName(alarm.deviceId),
           alarm.deviceId?.toString() ?? '',
-          alarm.isResolved ? '已解决' : '未解决',
+          alarm.isResolved == 1 ? '已解决' : '未解决',
           _formatDateTimeString(alarm.createdAt),
-          alarm.updatedAt != null ? _formatDateTimeString(alarm.updatedAt) : ''
+          alarm.isResolved == 1 ? _formatDateTimeString(alarm.createdAt) : ''
         ];
         buffer.writeln(row.join(','));
       }
@@ -110,7 +111,7 @@ class DataExporter {
           record.hatchDate != null ? _formatDateTimeString(record.hatchDate!) : '',
           record.growthStage ?? '',
           record.remark ?? '',
-          _formatDateTimeString(record.createdAt)
+          _formatDateTimeString(record.createdAt.toIso8601String())
         ];
         buffer.writeln(row.join(','));
       }
@@ -161,15 +162,15 @@ class DataExporter {
       for (final data in sensorData) {
         final device = devices.firstWhere(
           (d) => d.id == data.deviceId,
-          orElse: () => Device(id: 0, name: '未知设备'),
+          orElse: () => Device(id: 0, deviceName: '未知设备'),
         );
         final row = [
           _formatDateTimeString(data.timestamp),
           data.deviceId.toString(),
           device.deviceName,
-          data.sensorType,
-          data.value.toString(),
-          data.unit
+          '传感器',
+          data.temperature?.toString() ?? data.ph?.toString() ?? '0',
+          '℃'
         ];
         buffer.writeln(row.join(','));
       }
@@ -219,11 +220,11 @@ class DataExporter {
         final row = [
           device.id.toString(),
           device.deviceName,
-          device.deviceNumber,
-          device.deviceType,
+          device.deviceName, // deviceNumber 已废弃，使用 deviceName
+          device.deviceTypeName ?? '', // deviceType 已废弃，使用 deviceTypeName
           device.location,
           device.status,
-          _formatDateTimeString(device.createdAt)
+          _formatDateTimeString(device.createdAt.toIso8601String())
         ];
         buffer.writeln(row.join(','));
       }
@@ -274,8 +275,10 @@ class DataExporter {
   }
 
   static String _calculateDeviation(AlarmRecord alarm) {
-    if (alarm.thresholdValue == 0 || alarm.actualValue == 0) return '0';
-    final deviation = ((alarm.actualValue - alarm.thresholdValue) / alarm.thresholdValue * 100);
-    return (deviation ?? 0).toStringAsFixed(2);
+    final threshold = alarm.thresholdValue ?? 0;
+    final actual = alarm.actualValue ?? 0;
+    if (threshold == 0 || actual == 0) return '0';
+    final deviation = ((actual - threshold) / threshold * 100);
+    return deviation.toStringAsFixed(2);
   }
 }
