@@ -177,7 +177,6 @@ class _HistoryPageState extends State<HistoryPage> {
         },
       );
     }
-  }
 
   Widget _buildTypeSelector() {
     final types = [
