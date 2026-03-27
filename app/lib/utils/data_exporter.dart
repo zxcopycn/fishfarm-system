@@ -276,6 +276,6 @@ class DataExporter {
   static String _calculateDeviation(AlarmRecord alarm) {
     if (alarm.thresholdValue == 0 || alarm.actualValue == 0) return '0';
     final deviation = ((alarm.actualValue - alarm.thresholdValue) / alarm.thresholdValue * 100);
-    return deviation.toStringAsFixed(2);
+    return (deviation ?? 0).toStringAsFixed(2);
   }
 }
