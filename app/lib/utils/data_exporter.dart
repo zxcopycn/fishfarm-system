@@ -252,19 +252,12 @@ class DataExporter {
     return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 
-  static String _formatDateTimeString(dynamic dateTime) {
+  static String _formatDateTimeString(String dateTimeStr) {
     try {
-      DateTime dt;
-      if (dateTime is DateTime) {
-        dt = dateTime;
-      } else if (dateTime is String) {
-        dt = DateTime.parse(dateTime);
-      } else {
-        return dateTime?.toString() ?? '';
-      }
-      return DateFormat('yyyy-MM-dd HH:mm:ss').format(dt);
+      final dateTime = DateTime.parse(dateTimeStr);
+      return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
     } catch (e) {
-      return dateTime?.toString() ?? '';
+      return dateTimeStr;
     }
   }
 
