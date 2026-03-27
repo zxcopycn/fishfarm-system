@@ -42,31 +42,31 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   final List<BottomNavigationBarItem> _items = [
     const BottomNavigationBarItem(
-      icon: Icon(Icons.dashboard),
+      icon: const Icon(Icons.dashboard),
       label: '仪表盘',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.settings_remote),
+      icon: const Icon(Icons.settings_remote),
       label: '设备控制',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.history),
+      icon: const Icon(Icons.history),
       label: '历史',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.warning),
+      icon: const Icon(Icons.warning),
       label: '预警',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.agriculture),
+      icon: const Icon(Icons.agriculture),
       label: '生产',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.notifications),
+      icon: const Icon(Icons.notifications),
       label: '提醒',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
+      icon: const Icon(Icons.settings),
       label: '设置',
     ),
   ];
