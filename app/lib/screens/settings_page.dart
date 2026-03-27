@@ -233,21 +233,21 @@ class _SettingsPageState extends State<SettingsPage> {
               '启用通知',
               _notificationsEnabled,
                (value) { setState(() => _notificationsEnabled = value); },
-              icon: const Icon(Icons.notifications,
+              icon: const Icon(Icons.notifications),
             ),
             const SizedBox(height: 16),
             _buildSwitchItem(
               '预警推送',
               true, // TODO: 从设置中读取
                (value) {},
-              icon: const Icon(Icons.warning,
+              icon: const Icon(Icons.warning),
             ),
             const SizedBox(height: 16),
             _buildSwitchItem(
               '设备状态推送',
               true, // TODO: 从设置中读取
                (value) {},
-              icon: const Icon(Icons.device_hub,
+              icon: const Icon(Icons.device_hub),
             ),
           ],
         ),
@@ -276,7 +276,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 16),
             _buildExportButton(
-              icon: const Icon(Icons.warning,
+              icon: const Icon(Icons.warning),
               title: '导出预警记录',
               subtitle: '导出所有预警记录为CSV文件',
               onTap: _exportAlarms,
