@@ -158,11 +158,11 @@ class _ReminderListPageState extends State<ReminderListPage> {
         children: [
           const Text('筛选: '),
           const SizedBox(width: 8),
-          _buildFilterChip('全部', 0, 'groups'),
+          _buildFilterChip('全部', 0, Icons.groups),
           const SizedBox(width: 8),
-          _buildFilterChip('未完成', 1, 'todo'),
+          _buildFilterChip('未完成', 1, Icons.todo),
           const SizedBox(width: 8),
-          _buildFilterChip('已完成', 2, 'check_circle'),
+          _buildFilterChip('已完成', 2, Icons.check_circle),
         ],
       ),
     );

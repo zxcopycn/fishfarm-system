@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import import 'dashboard_page.dart';
-import import 'control_page.dart';
-import import 'history_page.dart';
-import import 'alarms_page.dart';
-import import 'production_page.dart';
-import import 'reminder_list_page.dart';
-import import 'settings_page.dart';
+import 'dashboard_page.dart';
+import 'control_page.dart';
+import 'history_page.dart';
+import 'alarms_page.dart';
+import 'production_page.dart';
+import 'reminder_list_page.dart';
+import 'settings_page.dart';
 import 'package:fishfarm_monitor/services/api_service.dart';
 
 class HomePage extends StatefulWidget {

@@ -9,6 +9,8 @@ class ProductionRecord {
   final double length; // 平均长度
   final double feedAmount; // 投喂量
   final String? remark;
+  final DateTime createdAt; // 创建时间
+  final DateTime updatedAt; // 更新时间
 
   ProductionRecord({
     required this.id,
@@ -21,6 +23,8 @@ class ProductionRecord {
     required this.length,
     required this.feedAmount,
     this.remark,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory ProductionRecord.fromJson(Map<String, dynamic> json) {
@@ -37,6 +41,12 @@ class ProductionRecord {
       length: json['length'].toDouble(),
       feedAmount: json['feed_amount'].toDouble(),
       remark: json['remark'],
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : DateTime.now(),
     );
   }
 }
