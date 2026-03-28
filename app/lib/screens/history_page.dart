@@ -168,7 +168,7 @@ class _HistoryPageState extends State<HistoryPage> {
             child: Text(device.deviceName),
           );
         }).toList(),
-        onChanged: (device) {
+          onChanged: (device) {
           setState(() {
             _selectedDevice = device;
             _sensorData.clear();
