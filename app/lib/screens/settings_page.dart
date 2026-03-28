@@ -297,7 +297,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 12),
             _buildExportButton(
-              icon: const Icon(Icons.devices),
+              icon: Icons.devices,
               title: '导出设备信息',
               subtitle: '导出所有设备信息为CSV文件',
               onTap: _exportDevices,

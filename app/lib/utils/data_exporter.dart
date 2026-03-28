@@ -162,7 +162,7 @@ class DataExporter {
       for (final data in sensorData) {
         final device = devices.firstWhere(
           (d) => d.id == data.deviceId,
-          orElse: () => Device(id: 0, deviceName: '未知设备'),
+          orElse: () => Device(id: 0, deviceName: '未知设备', deviceTypeId: 0, location: '未知', status: 0, createdAt: DateTime.now()),
         );
         final row = [
           _formatDateTimeString(data.timestamp),
