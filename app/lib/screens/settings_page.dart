@@ -192,7 +192,7 @@ class _SettingsPageState extends State<SettingsPage> {
               '自动刷新',
               _autoRefresh,
                (value) => setState(() => _autoRefresh = value),
-              icon: const Icon(Icons.refresh)),
+              icon: const Icon(Icons.refresh),
             ),
             if (_autoRefresh) [
               const SizedBox(height: 16),
