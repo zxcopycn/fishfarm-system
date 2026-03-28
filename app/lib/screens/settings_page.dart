@@ -194,18 +194,18 @@ class _SettingsPageState extends State<SettingsPage> {
                (value) => setState(() => _autoRefresh = value),
               icon: const Icon(Icons.refresh),
             ),
-            if (_autoRefresh) [
+            if (_autoRefresh)
               const SizedBox(height: 16),
+            if (_autoRefresh)
               _buildSliderItem(
                 '刷新间隔',
                 '$_refreshInterval 秒',
-                '',
+                30.0,
                 10,
                 300,
                 (value) => setState(() => _refreshInterval = value.round()),
                 icon: const Icon(Icons.timer),
               ),
-            ],
             const SizedBox(height: 16),
             _buildSwitchItem(
               '深色模式',
