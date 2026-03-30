@@ -37,7 +37,7 @@ class WebSocketService {
       
       // 连接WebSocket
       _channel = WebSocketChannel.connect(
-        Uri.parse('ws://192.168.1.200:8000/ws'),
+        Uri.parse('ws://localhost:8000/ws'),
       );
 
       // 连接状态监听
