@@ -37,7 +37,7 @@ class WebSocketService {
       
       // 连接WebSocket
       _channel = WebSocketChannel.connect(
-        Uri.parse('ws://localhost:8000/ws'),
+        Uri.parse('ws://192.168.1.200:8080/ws'),
       );
 
       // 连接状态监听
@@ -164,14 +164,14 @@ class WebSocketService {
 
   // 重连
   void _reconnect() {
-    // 如果还有监听器，尝试重新连接
-    if (connectionStatus.value) {
-      Future.delayed(const Duration(seconds: 5), () {
-        if (!connectionStatus.value) {
-          initConnection();
-        }
-      });
-    }
+    // 修改为：不自动重连，避免频繁失败
+    print('WebSocket连接失败，使用HTTP轮询模式');
+    // 移除自动重连逻辑
+    // Future.delayed(const Duration(seconds: 5), () {
+    //   if (!connectionStatus.value) {
+    //     initConnection();
+    //   }
+    // });
   }
 
   // 断开连接

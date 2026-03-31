@@ -84,12 +84,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       setState(() {
         _isWebSocketConnected = true;
       });
-
       // 订阅所有设备的状态更新
       ApiService().subscribeToDeviceStatus(0); // 0 表示订阅所有设备
-
     } catch (e) {
       print('连接WebSocket失败: $e');
+      // 修改为：让WebSocket失败不影响整体功能
+      setState(() {
+        _isWebSocketConnected = false; // 标记为未连接，但继续运行
+      });
     }
   }
 
