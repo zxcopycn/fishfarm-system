@@ -19,7 +19,7 @@ class ApiService {
   late final Dio _dio;
 
   // API基础URL
-  String _baseUrl = 'http://192.168.1.200:8000'; // 局域网IP
+  String _baseUrl = 'http://192.168.1.200:8080'; // 飞牛OS局域网IP
 
   // WebSocket
   WebSocketChannel? _wsChannel;
