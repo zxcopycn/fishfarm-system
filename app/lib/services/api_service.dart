@@ -151,8 +151,14 @@ class ApiService {
     try {
       final response = await _dio.get('/api/devices');
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => Device.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]}, 需要提取data字段
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data']; // 提取data字段
+        }
+        
+        final List<dynamic> deviceList = data;
+        return deviceList.map((e) => Device.fromJson(e)).toList();
       }
       throw Exception('获取设备列表失败');
     } catch (e) {
@@ -164,7 +170,7 @@ class ApiService {
   Future<List<SensorData>> getSensorData({int limit = 20}) async {
     try {
       final response = await _dio.get(
-        '/api/sensor/latest',
+        '/api/sensor-data',
         queryParameters: {'limit': limit}
       );
       if (response.statusCode == 200) {
@@ -194,13 +200,19 @@ class ApiService {
       }
 
       final response = await _dio.get(
-        '/api/sensor/historical',
+        '/api/sensor-data',
         queryParameters: queryParams,
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => SensorData.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]}, 需要提取data字段
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+        
+        final List<dynamic> dataList = data;
+        return dataList.map((e) => SensorData.fromJson(e)).toList();
       }
       throw Exception('获取历史数据失败');
     } catch (e) {
@@ -213,8 +225,14 @@ class ApiService {
     try {
       final response = await _dio.get('/api/devices'); // 使用现有端点
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => ControlDevice.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]}, 需要提取data字段
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+        
+        final List<dynamic> deviceList = data;
+        return deviceList.map((e) => ControlDevice.fromJson(e)).toList();
       }
       throw Exception('获取控制设备失败');
     } catch (e) {
@@ -227,8 +245,14 @@ class ApiService {
     try {
       final response = await _dio.get('/api/alarms');
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => AlarmRule.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]}, 需要提取data字段
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+        
+        final List<dynamic> alarmList = data;
+        return alarmList.map((e) => AlarmRule.fromJson(e)).toList();
       }
       throw Exception('获取预警规则失败');
     } catch (e) {
