@@ -301,8 +301,14 @@ class ApiService {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => ProductionRecord.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]}, 需要提取data字段
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+        
+        final List<dynamic> dataList = data;
+        return dataList.map((e) => ProductionRecord.fromJson(e)).toList();
       }
       throw Exception('获取生产记录失败');
     } catch (e) {
@@ -569,7 +575,13 @@ class ApiService {
     try {
       final response = await _dio.get('/api/reminders');
       if (response.statusCode == 200) {
-        return response.data;
+        // 服务器返回格式: {"data": [...]}, 需要提取data字段
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+        
+        return data;
       }
       throw Exception('获取提醒统计失败');
     } catch (e) {
