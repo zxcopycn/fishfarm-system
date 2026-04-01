@@ -14,7 +14,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String _apiUrl = 'http://172.17.0.2:8080';
+  String _apiUrl = 'http://192.168.1.200:8080';
   bool _autoRefresh = true;
   int _refreshInterval = 30;
   bool _notificationsEnabled = true;
