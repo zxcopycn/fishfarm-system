@@ -149,7 +149,7 @@ class ApiService {
   // 获取设备列表
   Future<List<Device>> getDevices() async {
     try {
-      final response = await _dio.get('/api/devices/list');
+      final response = await _dio.get('/api/devices');
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((e) => Device.fromJson(e)).toList();
@@ -211,7 +211,7 @@ class ApiService {
   // 获取控制设备列表
   Future<List<ControlDevice>> getControlDevices() async {
     try {
-      final response = await _dio.get('/api/control/devices');
+      final response = await _dio.get('/api/devices'); // 使用现有端点
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((e) => ControlDevice.fromJson(e)).toList();
@@ -225,7 +225,7 @@ class ApiService {
   // 获取预警规则
   Future<List<AlarmRule>> getAlarmRules() async {
     try {
-      final response = await _dio.get('/api/alarms/rules');
+      final response = await _dio.get('/api/alarms');
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((e) => AlarmRule.fromJson(e)).toList();
@@ -272,7 +272,7 @@ class ApiService {
       if (fishType != null) queryParams['fish_type'] = fishType;
 
       final response = await _dio.get(
-        '/api/production/list',
+        '/api/production-records',
         queryParameters: queryParams,
       );
 
@@ -543,7 +543,7 @@ class ApiService {
   // 获取提醒统计
   Future<Map<String, dynamic>> getReminderSummary() async {
     try {
-      final response = await _dio.get('/api/reminders/summary');
+      final response = await _dio.get('/api/reminders');
       if (response.statusCode == 200) {
         return response.data;
       }
