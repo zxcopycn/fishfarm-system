@@ -29,18 +29,20 @@ class ProductionRecord {
 
   factory ProductionRecord.fromJson(Map<String, dynamic> json) {
     return ProductionRecord(
-      id: json['id'],
-      fishType: json['fish_type'],
-      quantity: json['quantity'].toDouble(),
-      spawnDate: DateTime.parse(json['spawn_date']),
+      id: json['id'] as int? ?? 0,
+      fishType: json['fish_type'] as String? ?? '未知鱼种',
+      quantity: (json['quantity'] as num?)?.toDouble() ?? 0.0,
+      spawnDate: json['spawn_date'] != null
+          ? DateTime.parse(json['spawn_date'])
+          : DateTime.now(),
       hatchDate: json['hatch_date'] != null
           ? DateTime.parse(json['hatch_date'])
           : null,
-      growthStage: json['growth_stage'],
-      weight: json['weight'].toDouble(),
-      length: json['length'].toDouble(),
-      feedAmount: json['feed_amount'].toDouble(),
-      remark: json['remark'],
+      growthStage: json['growth_stage'] as String? ?? '未知阶段',
+      weight: (json['weight'] as num?)?.toDouble() ?? 0.0,
+      length: (json['length'] as num?)?.toDouble() ?? 0.0,
+      feedAmount: (json['feed_amount'] as num?)?.toDouble() ?? 0.0,
+      remark: json['remark'] as String?,
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'])
           : DateTime.now(),

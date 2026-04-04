@@ -135,6 +135,64 @@ class FishFarmAPI(BaseHTTPRequestHandler):
             ]
             self._send_response({"data": sensor_data})
         
+        elif path == "/api/alarms/records":
+            # 获取预警记录（带过滤）
+            level = query.get('level', [None])[0]
+            is_resolved = query.get('is_resolved', ['false'])[0].lower() == 'true'
+            days = int(query.get('days', ['7'])[0])
+
+            # 模拟预警记录数据
+            alarms = [
+                {
+                    "id": 1,
+                    "device_id": 1,
+                    "device_name": "水温传感器1",
+                    "alarm_type": "temperature",
+                    "alarm_level": "warning",
+                    "title": "水温偏高",
+                    "description": "当前水温25.5°C，接近上限值26°C",
+                    "threshold": 26.0,
+                    "status": "active" if not is_resolved else "resolved",
+                    "created_at": (datetime.now() - timedelta(days=1)).isoformat(),
+                    "resolved_at": None if not is_resolved else (datetime.now() - timedelta(hours=2)).isoformat()
+                },
+                {
+                    "id": 2,
+                    "device_id": 2,
+                    "device_name": "PH传感器1",
+                    "alarm_type": "ph",
+                    "alarm_level": "warning",
+                    "title": "PH值偏低",
+                    "description": "当前PH值7.0，低于正常范围",
+                    "threshold": 7.2,
+                    "status": "active" if not is_resolved else "resolved",
+                    "created_at": (datetime.now() - timedelta(days=2)).isoformat(),
+                    "resolved_at": None if not is_resolved else (datetime.now() - timedelta(days=1)).isoformat()
+                },
+                {
+                    "id": 3,
+                    "device_id": 3,
+                    "device_name": "溶解氧传感器1",
+                    "alarm_type": "oxygen",
+                    "alarm_level": "warning",
+                    "title": "溶解氧偏低",
+                    "description": "当前溶解氧6.5 mg/L，低于正常范围",
+                    "threshold": 7.0,
+                    "status": "active" if not is_resolved else "resolved",
+                    "created_at": (datetime.now() - timedelta(days=3)).isoformat(),
+                    "resolved_at": None if not is_resolved else (datetime.now() - timedelta(hours=5)).isoformat()
+                }
+            ]
+
+            # 过滤预警记录
+            filtered_alarms = alarms
+            if level:
+                filtered_alarms = [a for a in filtered_alarms if a['alarm_level'] == level]
+            if is_resolved:
+                filtered_alarms = [a for a in filtered_alarms if a['status'] == 'resolved']
+
+            self._send_response({"data": filtered_alarms})
+
         elif path == "/api/alarms":
             alarms = [
                 {
