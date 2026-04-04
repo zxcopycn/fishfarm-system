@@ -1,3 +1,5 @@
+import '../../utils/type_converters.dart';
+
 class AlarmLevel {
   final String level;
   final int code;
@@ -37,12 +39,12 @@ class AlarmRule {
 
   factory AlarmRule.fromJson(Map<String, dynamic> json) {
     return AlarmRule(
-      id: json['id'],
-      sensorType: json['sensor_type'],
-      level: json['level'],
-      minThreshold: json['min_threshold'].toDouble(),
-      maxThreshold: json['max_threshold'].toDouble(),
-      description: json['description'],
+      id: TypeConverters.safeInt(json['id']) ?? 0,
+      sensorType: json['sensor_type']?.toString() ?? '',
+      level: json['level']?.toString() ?? '',
+      minThreshold: TypeConverters.safeDouble(json['min_threshold']) ?? 0.0,
+      maxThreshold: TypeConverters.safeDouble(json['max_threshold']) ?? 0.0,
+      description: json['description']?.toString() ?? '',
     );
   }
 }
@@ -74,16 +76,16 @@ class AlarmRecord {
 
   factory AlarmRecord.fromJson(Map<String, dynamic> json) {
     return AlarmRecord(
-      id: json['id'],
-      deviceId: json['device_id'],
-      deviceName: json['device_name'],
+      id: TypeConverters.safeInt(json['id']) ?? 0,
+      deviceId: TypeConverters.safeInt(json['device_id']) ?? 0,
+      deviceName: json['device_name']?.toString(),
       level: AlarmLevel.fromString(json['alarm_level']),
-      thresholdValue: json['threshold_value']?.toDouble(),
-      actualValue: json['actual_value']?.toDouble(),
-      message: json['message'],
-      isResolved: json['is_resolved'],
-      createdAt: DateTime.parse(json['created_at']),
-      timeAgo: json['time_ago'] ?? '',
+      thresholdValue: TypeConverters.safeDouble(json['threshold_value']),
+      actualValue: TypeConverters.safeDouble(json['actual_value']),
+      message: json['message']?.toString() ?? '',
+      isResolved: TypeConverters.safeInt(json['is_resolved']) ?? 0,
+      createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
+      timeAgo: json['time_ago']?.toString() ?? '',
     );
   }
 

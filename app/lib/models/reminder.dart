@@ -1,3 +1,5 @@
+import '../../utils/type_converters.dart';
+
 class Reminder {
   int? id;
   String title;
@@ -21,14 +23,14 @@ class Reminder {
 
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
-      id: json['id'],
-      title: json['title'] ?? '',
-      content: json['content'],
-      reminderTime: json['reminder_time'] ?? DateTime.now().toIso8601String(),
-      isCompleted: json['is_completed'] == 1,
-      completedAt: json['completed_at'],
-      createdAt: json['created_at'] ?? DateTime.now().toIso8601String(),
-      updatedAt: json['updated_at'] ?? DateTime.now().toIso8601String(),
+      id: TypeConverters.safeInt(json['id']),
+      title: json['title']?.toString() ?? '',
+      content: json['content']?.toString(),
+      reminderTime: json['reminder_time']?.toString() ?? DateTime.now().toIso8601String(),
+      isCompleted: TypeConverters.safeBool(json['is_completed']) ?? false,
+      completedAt: json['completed_at']?.toString(),
+      createdAt: json['created_at']?.toString() ?? DateTime.now().toIso8601String(),
+      updatedAt: json['updated_at']?.toString() ?? DateTime.now().toIso8601String(),
     );
   }
 

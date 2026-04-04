@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../../utils/type_converters.dart';
 
 class SensorData {
   final int id;
@@ -34,18 +35,18 @@ class SensorData {
   // 从JSON创建对象
   factory SensorData.fromJson(Map<String, dynamic> json) {
     return SensorData(
-      id: json['id'],
-      deviceId: json['device_id'],
-      deviceName: json['device_name'],
-      temperature: (json['temperature'] as num?)?.toDouble() ?? 0.0,
-      ph: (json['ph'] as num?)?.toDouble() ?? 0.0,
-      ammonia: (json['ammonia'] as num?)?.toDouble() ?? 0.0,
-      nitrite: (json['nitrite'] as num?)?.toDouble() ?? 0.0,
-      oxygen: (json['oxygen'] as num?)?.toDouble() ?? 0.0,
+      id: TypeConverters.safeInt(json['id']) ?? 0,
+      deviceId: TypeConverters.safeInt(json['device_id']) ?? 0,
+      deviceName: json['device_name']?.toString(),
+      temperature: TypeConverters.safeDouble(json['temperature']) ?? 0.0,
+      ph: TypeConverters.safeDouble(json['ph']) ?? 0.0,
+      ammonia: TypeConverters.safeDouble(json['ammonia']) ?? 0.0,
+      nitrite: TypeConverters.safeDouble(json['nitrite']) ?? 0.0,
+      oxygen: TypeConverters.safeDouble(json['oxygen']) ?? 0.0,
       humidity: 0.0, // 后端没有提供此字段，使用默认值
-      timestamp: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
-      createdAt: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
-      status: json['status'],
+      timestamp: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
+      createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
+      status: json['status']?.toString(),
       additionalData: json,
     );
   }

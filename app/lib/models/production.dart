@@ -1,3 +1,5 @@
+import '../../utils/type_converters.dart';
+
 class ProductionRecord {
   final int id;
   final String fishType;
@@ -29,25 +31,18 @@ class ProductionRecord {
 
   factory ProductionRecord.fromJson(Map<String, dynamic> json) {
     return ProductionRecord(
-      id: json['id'] as int? ?? 0,
-      fishType: json['fish_type'] as String? ?? '未知鱼种',
-      quantity: (json['quantity'] as num?)?.toDouble() ?? 0.0,
-      spawnDate: json['spawn_date'] != null
-          ? DateTime.parse(json['spawn_date'])
-          : DateTime.now(),
-      hatchDate: json['hatch_date'] != null
-          ? DateTime.parse(json['hatch_date'])
-          : null,
-      growthStage: json['growth_stage'] as String? ?? '未知阶段',
-      weight: (json['weight'] as num?)?.toDouble() ?? 0.0,
-      length: (json['length'] as num?)?.toDouble() ?? 0.0,
-      feedAmount: (json['feed_amount'] as num?)?.toDouble() ?? 0.0,
-      remark: json['remark'] as String?,
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : DateTime.now(),
-      updatedAt: json['updated_at'] != null
-          ? DateTime.parse(json['updated_at'])
+      id: TypeConverters.safeInt(json['id']) ?? 0,
+      fishType: json['fish_type']?.toString() ?? '未知鱼种',
+      quantity: TypeConverters.safeDouble(json['quantity']) ?? 0.0,
+      spawnDate: TypeConverters.safeDateTime(json['spawn_date']) ?? DateTime.now(),
+      hatchDate: TypeConverters.safeDateTime(json['hatch_date']),
+      growthStage: json['growth_stage']?.toString() ?? '未知阶段',
+      weight: TypeConverters.safeDouble(json['weight']) ?? 0.0,
+      length: TypeConverters.safeDouble(json['length']) ?? 0.0,
+      feedAmount: TypeConverters.safeDouble(json['feed_amount']) ?? 0.0,
+      remark: json['remark']?.toString(),
+      createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
+      updatedAt: TypeConverters.safeDateTime(json['updated_at']) ?? DateTime.now(),
           : DateTime.now(),
     );
   }

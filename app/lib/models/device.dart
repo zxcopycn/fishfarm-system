@@ -1,3 +1,40 @@
+// 通用安全类型转换工具类
+class TypeConverters {
+  static int? safeInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is num) return value.toInt();
+    return null;
+  }
+
+  static double? safeDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    if (value is num) return value.toDouble();
+    return null;
+  }
+
+  static bool? safeBool(dynamic value) {
+    if (value == null) return null;
+    if (value is bool) return value;
+    if (value is int) return value == 1;
+    if (value is String) return value.toLowerCase() == 'true' || value == '1';
+    return null;
+  }
+
+  static DateTime? safeDateTime(dynamic value) {
+    if (value == null) return null;
+    if (value is DateTime) return value;
+    if (value is String) return DateTime.tryParse(value);
+    return null;
+  }
+}
+
+import '../../utils/type_converters.dart';
+
 class DeviceType {
   final int id;
   final String typeName;
@@ -9,7 +46,7 @@ class DeviceType {
 
   factory DeviceType.fromJson(Map<String, dynamic> json) {
     return DeviceType(
-      id: json['id'] is int ? json['id'] : (json['id'] is String ? int.tryParse(json['id'].toString()) ?? 0 : 0),
+      id: TypeConverters.safeInt(json['id']) ?? 0,
       typeName: json['type_name']?.toString() ?? (json['device_type']?.toString() ?? ''),
     );
   }
@@ -42,16 +79,16 @@ class Device {
 
   factory Device.fromJson(Map<String, dynamic> json) {
     return Device(
-      id: json['id'] is int ? json['id'] : (json['id'] is String ? int.tryParse(json['id'].toString()) ?? 0 : 0),
+      id: TypeConverters.safeInt(json['id']) ?? 0,
       deviceName: json['device_name']?.toString() ?? '',
-      deviceTypeId: json['device_type_id'] is int ? json['device_type_id'] : (json['device_type_id'] is String ? int.tryParse(json['device_type_id'].toString()) ?? 0 : 0),
+      deviceTypeId: TypeConverters.safeInt(json['device_type_id']) ?? 0,
       deviceTypeName: json['device_type_name']?.toString(),
       location: json['location']?.toString() ?? '',
       ipAddress: json['ip_address']?.toString(),
       mqttTopic: json['mqtt_topic']?.toString(),
-      status: json['status'] is int ? json['status'] : (json['status'] is String ? int.tryParse(json['status'].toString()) ?? 0 : 0),
-      currentValue: json['current_value'] is num ? (json['current_value'] is int ? json['current_value'].toDouble() : json['current_value']) : null,
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at'].toString()) : DateTime.now(),
+      status: TypeConverters.safeInt(json['status']) ?? 0,
+      currentValue: TypeConverters.safeDouble(json['current_value']),
+      createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
     );
   }
 }
@@ -81,23 +118,15 @@ class ControlDevice {
 
   factory ControlDevice.fromJson(Map<String, dynamic> json) {
     return ControlDevice(
-      id: json['id'] is int ? json['id'] : (json['id'] is String ? int.tryParse(json['id'].toString()) ?? 0 : 0),
+      id: TypeConverters.safeInt(json['id']) ?? 0,
       deviceName: json['device_name']?.toString() ?? '',
       deviceType: json['device_type']?.toString() ?? '',
       location: json['location']?.toString() ?? '',
-      status: json['status'] is int ? json['status'] : (json['status'] is String ? int.tryParse(json['status'].toString()) ?? 0 : 0),
+      status: TypeConverters.safeInt(json['status']) ?? 0,
       mqttTopic: json['mqtt_topic']?.toString(),
-      currentPower: json['current_power'] != null
-          ? (json['current_power'] is num
-              ? (json['current_power'] is int ? json['current_power'].toDouble() : json['current_power'])
-              : null)
-          : null,
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'].toString())
-          : DateTime.now(),
-      updatedAt: json['updated_at'] != null
-          ? DateTime.parse(json['updated_at'].toString())
-          : DateTime.now(),
+      currentPower: TypeConverters.safeDouble(json['current_power']),
+      createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
+      updatedAt: TypeConverters.safeDateTime(json['updated_at']) ?? DateTime.now(),
     );
   }
 
