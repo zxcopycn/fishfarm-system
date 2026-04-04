@@ -174,8 +174,12 @@ class ApiService {
         queryParameters: {'limit': limit}
       );
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => SensorData.fromJson(e)).toList();
+        dynamic responseData = response.data;
+        if (responseData is Map<String, dynamic>) {
+          responseData = responseData['data']; // 智能提取data字段
+        }
+        final List<dynamic> dataList = responseData;
+        return dataList.map((e) => SensorData.fromJson(e)).toList();
       }
       throw Exception('获取传感器数据失败');
     } catch (e) {
