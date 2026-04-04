@@ -174,15 +174,27 @@ class ApiService {
         queryParameters: {'limit': limit}
       );
       if (response.statusCode == 200) {
+        print('[DEBUG] getSensorData: 响应类型 = ${response.data.runtimeType}');
+        print('[DEBUG] getSensorData: 响应内容 = ${response.data}');
+
         dynamic responseData = response.data;
         if (responseData is Map<String, dynamic>) {
-          responseData = responseData['data']; // 智能提取data字段
+          print('[DEBUG] getSensorData: response.data 是 Map，提取 data 字段');
+          responseData = responseData['data'];
+          print('[DEBUG] getSensorData: data 字段类型 = ${responseData.runtimeType}');
         }
+
+        if (responseData is! List) {
+          print('[DEBUG] getSensorData: 错误! responseData 不是 List，而是 ${responseData.runtimeType}');
+          print('[DEBUG] getSensorData: responseData = $responseData');
+        }
+
         final List<dynamic> dataList = responseData;
         return dataList.map((e) => SensorData.fromJson(e)).toList();
       }
       throw Exception('获取传感器数据失败');
     } catch (e) {
+      print('[ERROR] getSensorData 异常: $e');
       throw Exception('获取传感器数据失败: $e');
     }
   }
