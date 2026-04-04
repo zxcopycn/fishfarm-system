@@ -79,7 +79,7 @@ class AlarmRecord {
       id: TypeConverters.safeInt(json['id']) ?? 0,
       deviceId: TypeConverters.safeInt(json['device_id']) ?? 0,
       deviceName: json['device_name']?.toString(),
-      level: AlarmLevel.fromString(json['alarm_level']),
+      level: json['alarm_level'] != null ? AlarmLevel.fromString(json['alarm_level']) : AlarmLevel('提醒', 1),
       thresholdValue: TypeConverters.safeDouble(json['threshold_value']),
       actualValue: TypeConverters.safeDouble(json['actual_value']),
       message: json['message']?.toString() ?? '',

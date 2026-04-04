@@ -5,11 +5,11 @@ class SensorData {
   final int id;
   final int deviceId;
   final String? deviceName;
-  final double temperature;
-  final double ph;
-  final double ammonia;
-  final double nitrite;
-  final double oxygen;
+  final double? temperature;  // 修改为可为空
+  final double? ph;          // 修改为可为空
+  final double? ammonia;     // 修改为可为空
+  final double? nitrite;     // 修改为可为空
+  final double? oxygen;      // 修改为可为空
   final double humidity;
   final DateTime timestamp;
   final DateTime createdAt;
@@ -20,11 +20,11 @@ class SensorData {
     required this.id,
     required this.deviceId,
     this.deviceName,
-    required this.temperature,
-    required this.ph,
-    required this.ammonia,
-    required this.nitrite,
-    required this.oxygen,
+    this.temperature,
+    this.ph,
+    this.ammonia,
+    this.nitrite,
+    this.oxygen,
     this.humidity = 0.0,
     required this.timestamp,
     required this.createdAt,
@@ -38,11 +38,11 @@ class SensorData {
       id: TypeConverters.safeInt(json['id']) ?? 0,
       deviceId: TypeConverters.safeInt(json['device_id']) ?? 0,
       deviceName: json['device_name']?.toString(),
-      temperature: TypeConverters.safeDouble(json['temperature']) ?? 0.0,
-      ph: TypeConverters.safeDouble(json['ph']) ?? 0.0,
-      ammonia: TypeConverters.safeDouble(json['ammonia']) ?? 0.0,
-      nitrite: TypeConverters.safeDouble(json['nitrite']) ?? 0.0,
-      oxygen: TypeConverters.safeDouble(json['oxygen']) ?? 0.0,
+      temperature: TypeConverters.safeDouble(json['temperature']),
+      ph: TypeConverters.safeDouble(json['ph']),
+      ammonia: TypeConverters.safeDouble(json['ammonia']),
+      nitrite: TypeConverters.safeDouble(json['nitrite']),
+      oxygen: TypeConverters.safeDouble(json['oxygen']),
       humidity: 0.0, // 后端没有提供此字段，使用默认值
       timestamp: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
       createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),

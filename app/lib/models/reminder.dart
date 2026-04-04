@@ -23,7 +23,7 @@ class Reminder {
 
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
-      id: TypeConverters.safeInt(json['id']),
+      id: TypeConverters.safeInt(json['id']) ?? 0,
       title: json['title']?.toString() ?? '',
       content: json['content']?.toString(),
       reminderTime: json['reminder_time']?.toString() ?? DateTime.now().toIso8601String(),

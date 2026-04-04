@@ -43,7 +43,6 @@ class ProductionRecord {
       remark: json['remark']?.toString(),
       createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
       updatedAt: TypeConverters.safeDateTime(json['updated_at']) ?? DateTime.now(),
-          : DateTime.now(),
     );
   }
 }
@@ -67,12 +66,12 @@ class ProductionStatistics {
 
   factory ProductionStatistics.fromJson(Map<String, dynamic> json) {
     return ProductionStatistics(
-      fishType: json['fish_type'],
-      totalQuantity: json['total_quantity'],
-      totalWeight: json['total_weight'].toDouble(),
-      totalLength: json['total_length'],
-      totalFeedAmount: json['total_feed_amount'].toDouble(),
-      recordCount: json['record_count'],
+      fishType: json['fish_type']?.toString() ?? '',
+      totalQuantity: TypeConverters.safeInt(json['total_quantity']) ?? 0,
+      totalWeight: TypeConverters.safeDouble(json['total_weight']) ?? 0.0,
+      totalLength: TypeConverters.safeInt(json['total_length']) ?? 0,
+      totalFeedAmount: TypeConverters.safeDouble(json['total_feed_amount']) ?? 0.0,
+      recordCount: TypeConverters.safeInt(json['record_count']) ?? 0,
     );
   }
 }
