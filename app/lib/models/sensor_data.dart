@@ -12,6 +12,7 @@ class SensorData {
   final double humidity;
   final DateTime timestamp;
   final DateTime createdAt;
+  final String? status;
   final Map<String, dynamic>? additionalData;
 
   SensorData({
@@ -23,9 +24,10 @@ class SensorData {
     required this.ammonia,
     required this.nitrite,
     required this.oxygen,
-    required this.humidity,
+    this.humidity = 0.0,
     required this.timestamp,
     required this.createdAt,
+    this.status,
     this.additionalData,
   });
 
@@ -35,15 +37,16 @@ class SensorData {
       id: json['id'],
       deviceId: json['device_id'],
       deviceName: json['device_name'],
-      temperature: (json['temperature'] as num).toDouble(),
-      ph: (json['ph'] as num).toDouble(),
-      ammonia: (json['ammonia'] as num).toDouble(),
-      nitrite: (json['nitrite'] as num).toDouble(),
-      oxygen: (json['oxygen'] as num).toDouble(),
-      humidity: (json['humidity'] as num).toDouble(),
-      timestamp: DateTime.parse(json['timestamp']),
-      createdAt: DateTime.parse(json['created_at'] ?? json['timestamp']),
-      additionalData: json['additional_data'],
+      temperature: (json['temperature'] as num?)?.toDouble() ?? 0.0,
+      ph: (json['ph'] as num?)?.toDouble() ?? 0.0,
+      ammonia: (json['ammonia'] as num?)?.toDouble() ?? 0.0,
+      nitrite: (json['nitrite'] as num?)?.toDouble() ?? 0.0,
+      oxygen: (json['oxygen'] as num?)?.toDouble() ?? 0.0,
+      humidity: 0.0, // 后端没有提供此字段，使用默认值
+      timestamp: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
+      createdAt: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
+      status: json['status'],
+      additionalData: json,
     );
   }
 
