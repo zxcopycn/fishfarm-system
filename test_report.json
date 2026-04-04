@@ -1,0 +1,74 @@
+[
+  {
+    "test_name": "后端服务健康检查",
+    "status": "PASS",
+    "details": "服务状态: healthy",
+    "timestamp": "2026-04-03T13:17:00.208766"
+  },
+  {
+    "test_name": "API文档访问",
+    "status": "PASS",
+    "details": "Swagger文档可访问",
+    "timestamp": "2026-04-03T13:17:01.215892"
+  },
+  {
+    "test_name": "数据库连接",
+    "status": "PASS",
+    "details": "数据库连接正常，表数量: 12",
+    "timestamp": "2026-04-03T13:17:02.218470"
+  },
+  {
+    "test_name": "设备添加",
+    "status": "FAIL",
+    "details": "添加失败: 404",
+    "timestamp": "2026-04-03T13:17:03.226082"
+  },
+  {
+    "test_name": "传感器数据",
+    "status": "FAIL",
+    "details": "缺少设备ID",
+    "timestamp": "2026-04-03T13:17:04.226564"
+  },
+  {
+    "test_name": "预警规则添加",
+    "status": "FAIL",
+    "details": "添加失败: 405",
+    "timestamp": "2026-04-03T13:17:05.234045"
+  },
+  {
+    "test_name": "控制设备",
+    "status": "FAIL",
+    "details": "没有找到控制设备",
+    "timestamp": "2026-04-03T13:17:06.259317"
+  },
+  {
+    "test_name": "提醒添加",
+    "status": "PASS",
+    "details": "提醒添加成功",
+    "timestamp": "2026-04-03T13:17:07.678853"
+  },
+  {
+    "test_name": "提醒列表查询",
+    "status": "PASS",
+    "details": "提醒数量: 1",
+    "timestamp": "2026-04-03T13:17:07.687604"
+  },
+  {
+    "test_name": "传感器统计",
+    "status": "PASS",
+    "details": "统计获取成功",
+    "timestamp": "2026-04-03T13:17:08.700353"
+  },
+  {
+    "test_name": "设备状态",
+    "status": "FAIL",
+    "details": "状态获取失败",
+    "timestamp": "2026-04-03T13:17:08.703945"
+  },
+  {
+    "test_name": "API性能测试",
+    "status": "PASS",
+    "details": "响应时间: 12.50ms",
+    "timestamp": "2026-04-03T13:17:09.716738"
+  }
+]
