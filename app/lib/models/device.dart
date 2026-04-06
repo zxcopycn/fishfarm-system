@@ -1,3 +1,5 @@
+import '../../utils/type_converters.dart';
+
 // 通用安全类型转换工具类
 class TypeConverters {
   static int? safeInt(dynamic value) {
@@ -32,8 +34,6 @@ class TypeConverters {
     return null;
   }
 }
-
-import '../../utils/type_converters.dart';
 
 class DeviceType {
   final int id;
