@@ -293,8 +293,14 @@ class ApiService {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => AlarmRecord.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]} 或直接返回 [...]
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+
+        final List<dynamic> dataList = data;
+        return dataList.map((e) => AlarmRecord.fromJson(e)).toList();
       }
       throw Exception('获取预警记录失败');
     } catch (e) {
@@ -490,8 +496,14 @@ class ApiService {
         queryParameters: {'is_completed': isCompleted}
       );
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((e) => Reminder.fromJson(e)).toList();
+        // 服务器返回格式: {"data": [...]} 或直接返回 [...]
+        dynamic data = response.data;
+        if (data is Map<String, dynamic>) {
+          data = data['data'];
+        }
+
+        final List<dynamic> dataList = data;
+        return dataList.map((e) => Reminder.fromJson(e)).toList();
       }
       throw Exception('获取提醒列表失败');
     } catch (e) {
