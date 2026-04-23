@@ -40,10 +40,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // 初始化API服务，加载保存的服务器地址
-  await ApiService.init();
+  try {
+    await ApiService.init();
+  } catch (e, stackTrace) {
+    print('API服务初始化失败: $e\n$stackTrace');
+  }
   
-  // 初始化WebSocket服务
-  WebSocketService().initConnection();
+  // 延迟初始化WebSocket服务，确保UI先渲染
+  Future.delayed(Duration(milliseconds: 500), () {
+    try {
+      WebSocketService().initConnection();
+    } catch (e) {
+      print('WebSocket服务初始化失败: $e');
+    }
+  });
   
   runApp(const FishFarmApp());
 }
