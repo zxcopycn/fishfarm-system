@@ -12,9 +12,26 @@ import 'package:fishfarm_monitor/models/reminder.dart';
 class ApiService {
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
+  
   ApiService._internal() {
-    _loadSavedUrl();
+    _baseUrl = 'http://192.168.1.200:8080'; // 默认值
     _initDio();
+  }
+
+  late final Dio _dio;
+
+  // API基础URL
+  String _baseUrl = 'http://192.168.1.200:8080'; // 飞牛OS局域网IP
+
+  // WebSocket
+  WebSocketChannel? _wsChannel;
+  StreamSubscription? _wsSubscription;
+  Map<String, List<Function>> _wsListeners = {};
+
+  // 初始化方法 - APP启动时调用
+  static Future<void> init() async {
+    await _instance._loadSavedUrl();
+    _instance._initDio();
   }
 
   // 从本地存储加载保存的URL
@@ -29,16 +46,6 @@ class ApiService {
       // 加载失败使用默认地址
     }
   }
-
-  late final Dio _dio;
-
-  // API基础URL
-  String _baseUrl = 'http://192.168.1.200:8080'; // 飞牛OS局域网IP
-
-  // WebSocket
-  WebSocketChannel? _wsChannel;
-  StreamSubscription? _wsSubscription;
-  Map<String, List<Function>> _wsListeners = {};
 
   void _initDio() {
     _dio = Dio(BaseOptions(
