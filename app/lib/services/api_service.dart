@@ -13,7 +13,21 @@ class ApiService {
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
   ApiService._internal() {
+    _loadSavedUrl();
     _initDio();
+  }
+
+  // 从本地存储加载保存的URL
+  Future<void> _loadSavedUrl() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final savedUrl = prefs.getString('api_url');
+      if (savedUrl != null && savedUrl.isNotEmpty) {
+        _baseUrl = savedUrl;
+      }
+    } catch (e) {
+      // 加载失败使用默认地址
+    }
   }
 
   late final Dio _dio;

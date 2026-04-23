@@ -35,9 +35,21 @@ class WebSocketService {
       // 获取或生成客户端ID
       _clientId = await _getClientId();
       
+      // 从本地存储加载API地址
+      String wsUrl = 'ws://192.168.1.200:8080/ws';
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        final savedUrl = prefs.getString('api_url');
+        if (savedUrl != null && savedUrl.isNotEmpty) {
+          wsUrl = savedUrl.replaceFirst('http://', 'ws://').replaceFirst('https://', 'wss://') + '/ws';
+        }
+      } catch (e) {
+        // 使用默认地址
+      }
+      
       // 连接WebSocket
       _channel = WebSocketChannel.connect(
-        Uri.parse('ws://192.168.1.200:8080/ws'),
+        Uri.parse(wsUrl),
       );
 
       // 连接状态监听
