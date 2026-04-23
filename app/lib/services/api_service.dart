@@ -14,14 +14,13 @@ class ApiService {
   factory ApiService() => _instance;
   
   ApiService._internal() {
-    _baseUrl = 'http://192.168.1.200:8080'; // 默认值
-    _initDio();
+    // 延迟初始化，不在这里初始化Dio
   }
 
-  late final Dio _dio;
+  Dio? _dio;
 
-  // API基础URL
-  String _baseUrl = 'http://192.168.1.200:8080'; // 飞牛OS局域网IP
+  // API基础URL - 默认值
+  String _baseUrl = 'http://192.168.1.200:8080';
 
   // WebSocket
   WebSocketChannel? _wsChannel;
@@ -59,7 +58,7 @@ class ApiService {
     ));
 
     // 添加拦截器
-    _dio.interceptors.add(InterceptorsWrapper(
+    _dio!.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         print('请求: ${options.method} ${options.uri}');
         handler.next(options);
@@ -170,7 +169,7 @@ class ApiService {
   // 获取设备列表
   Future<List<Device>> getDevices() async {
     try {
-      final response = await _dio.get('/api/devices');
+      final response = await _dio!.get('/api/devices');
       if (response.statusCode == 200) {
         // 服务器返回格式: {"data": [...]}, 需要提取data字段
         dynamic data = response.data;
@@ -190,7 +189,7 @@ class ApiService {
   // 获取传感器最新数据
   Future<List<SensorData>> getSensorData({int limit = 20}) async {
     try {
-      final response = await _dio.get(
+      final response = await _dio!.get(
         '/api/sensor-data',
         queryParameters: {'limit': limit}
       );
@@ -236,7 +235,7 @@ class ApiService {
         queryParams['end_time'] = endTime.toIso8601String();
       }
 
-      final response = await _dio.get(
+      final response = await _dio!.get(
         '/api/sensor-data',
         queryParameters: queryParams,
       );
@@ -260,7 +259,7 @@ class ApiService {
   // 获取控制设备列表
   Future<List<ControlDevice>> getControlDevices() async {
     try {
-      final response = await _dio.get('/api/devices'); // 使用现有端点
+      final response = await _dio!.get('/api/devices'); // 使用现有端点
       if (response.statusCode == 200) {
         // 服务器返回格式: {"data": [...]}, 需要提取data字段
         dynamic data = response.data;
@@ -280,7 +279,7 @@ class ApiService {
   // 获取预警规则
   Future<List<AlarmRule>> getAlarmRules() async {
     try {
-      final response = await _dio.get('/api/alarms');
+      final response = await _dio!.get('/api/alarms');
       if (response.statusCode == 200) {
         // 服务器返回格式: {"data": [...]}, 需要提取data字段
         dynamic data = response.data;
@@ -308,7 +307,7 @@ class ApiService {
       if (level != null) queryParams['level'] = level;
       if (isResolved != null) queryParams['is_resolved'] = isResolved;
 
-      final response = await _dio.get(
+      final response = await _dio!.get(
         '/api/alarms/records',
         queryParameters: queryParams,
       );
@@ -338,7 +337,7 @@ class ApiService {
       final queryParams = <String, dynamic>{'limit': limit};
       if (fishType != null) queryParams['fish_type'] = fishType;
 
-      final response = await _dio.get(
+      final response = await _dio!.get(
         '/api/production-records',
         queryParameters: queryParams,
       );
@@ -367,7 +366,7 @@ class ApiService {
     String? remark,
   }) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio!.post(
         '/api/control/$deviceId/control',
         data: {
           'action': action,
@@ -388,7 +387,7 @@ class ApiService {
   // 解决预警
   Future<bool> resolveAlarm(int recordId) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio!.post(
         '/api/alarms/records/$recordId/resolve'
       );
 
@@ -427,7 +426,7 @@ class ApiService {
       if (feedAmount != null) data['feed_amount'] = feedAmount;
       if (remark != null) data['remark'] = remark;
 
-      final response = await _dio.post(
+      final response = await _dio!.post(
         '/api/production/create',
         data: data,
       );
@@ -467,7 +466,7 @@ class ApiService {
       if (feedAmount != null) data['feed_amount'] = feedAmount;
       if (remark != null) data['remark'] = remark;
 
-      final response = await _dio.put(
+      final response = await _dio!.put(
         '/api/production/$id/update',
         data: data,
       );
@@ -484,7 +483,7 @@ class ApiService {
   // 删除生产记录
   Future<bool> deleteProductionRecord(int id) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio!.delete(
         '/api/production/$id/delete',
       );
 
@@ -500,7 +499,7 @@ class ApiService {
   // 健康检查
   Future<bool> healthCheck() async {
     try {
-      final response = await _dio.get('/health');
+      final response = await _dio!.get('/health');
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -512,7 +511,7 @@ class ApiService {
   // 获取提醒列表
   Future<List<Reminder>> getReminders({int isCompleted = 0}) async {
     try {
-      final response = await _dio.get(
+      final response = await _dio!.get(
         '/api/reminders',
         queryParameters: {'is_completed': isCompleted}
       );
@@ -539,7 +538,7 @@ class ApiService {
     String? reminderTime,
   }) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio!.post(
         '/api/reminders',
         data: {
           'title': title,
@@ -573,7 +572,7 @@ class ApiService {
       if (reminderTime != null) data['reminder_time'] = reminderTime;
       if (isCompleted != null) data['is_completed'] = isCompleted;
 
-      final response = await _dio.put(
+      final response = await _dio!.put(
         '/api/reminders/$id',
         data: data,
       );
@@ -590,7 +589,7 @@ class ApiService {
   // 删除提醒
   Future<bool> deleteReminder(int id) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio!.delete(
         '/api/reminders/$id',
       );
 
@@ -606,7 +605,7 @@ class ApiService {
   // 标记为已完成
   Future<bool> markReminderCompleted(int id) async {
     try {
-      final response = await _dio.patch(
+      final response = await _dio!.patch(
         '/api/reminders/$id/complete',
       );
 
@@ -622,7 +621,7 @@ class ApiService {
   // 获取提醒统计
   Future<Map<String, dynamic>> getReminderSummary() async {
     try {
-      final response = await _dio.get('/api/reminders');
+      final response = await _dio!.get('/api/reminders');
       if (response.statusCode == 200) {
         // 服务器返回格式: {"data": [...]}, 需要提取data字段
         dynamic data = response.data;
