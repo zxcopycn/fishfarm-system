@@ -43,6 +43,11 @@ async def lifespan(app: FastAPI):
     # 初始化数据库
     init_database()
 
+    # 初始化模拟数据（开发/测试环境）
+    if settings.APP_ENV != "production":
+        from app.services.mocking import MockDataGenerator
+        MockDataGenerator.init_all_mock_data()
+
     # 初始化MQTT客户端
     from app.utils.mqtt_client import init_mqtt_client
     mqtt_client = init_mqtt_client()

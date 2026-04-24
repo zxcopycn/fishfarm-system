@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 import 'package:fishfarm_monitor/services/api_service.dart';
 import 'package:fishfarm_monitor/utils/data_exporter.dart';
+import 'package:fishfarm_monitor/config/app_config.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -14,7 +15,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String _apiUrl = 'http://192.168.1.200:8080';
+  String _apiUrl = AppConfig.defaultApiUrl;
   bool _autoRefresh = true;
   int _refreshInterval = 30;
   bool _notificationsEnabled = true;
@@ -29,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _apiUrl = prefs.getString('api_url') ?? 'http://192.168.1.200:8080';
+      _apiUrl = prefs.getString('api_url') ?? AppConfig.defaultApiUrl;
       _autoRefresh = prefs.getBool('auto_refresh') ?? true;
       _refreshInterval = prefs.getInt('refresh_interval') ?? 30;
       _notificationsEnabled = prefs.getBool('notifications_enabled') ?? true;

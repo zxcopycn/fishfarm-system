@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fishfarm_monitor/models/device.dart';
 import 'package:fishfarm_monitor/models/sensor_data.dart';
 import 'package:fishfarm_monitor/models/alarm.dart';
+import 'package:fishfarm_monitor/config/app_config.dart';
 
 class WebSocketService {
   static final WebSocketService _instance = WebSocketService._internal();
@@ -36,7 +37,7 @@ class WebSocketService {
       _clientId = await _getClientId();
       
       // 从本地存储加载API地址
-      String wsUrl = 'ws://192.168.1.200:8080/ws';
+      String wsUrl = AppConfig.defaultApiUrl.replaceFirst('http://', 'ws://').replaceFirst('https://', 'wss://') + AppConfig.wsPath;
       try {
         final prefs = await SharedPreferences.getInstance();
         final savedUrl = prefs.getString('api_url');

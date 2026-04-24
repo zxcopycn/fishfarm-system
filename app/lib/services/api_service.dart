@@ -8,6 +8,7 @@ import 'package:fishfarm_monitor/models/sensor_data.dart';
 import 'package:fishfarm_monitor/models/alarm.dart';
 import 'package:fishfarm_monitor/models/production.dart';
 import 'package:fishfarm_monitor/models/reminder.dart';
+import 'package:fishfarm_monitor/config/app_config.dart';
 
 class ApiService {
   static final ApiService _instance = ApiService._internal();
@@ -19,8 +20,8 @@ class ApiService {
 
   Dio? _dio;
 
-  // API基础URL - 默认值
-  String _baseUrl = 'http://192.168.1.200:8080';
+  // API基础URL - 从配置文件读取默认值
+  String _baseUrl = AppConfig.defaultApiUrl;
 
   // WebSocket
   WebSocketChannel? _wsChannel;
