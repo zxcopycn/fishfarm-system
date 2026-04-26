@@ -16,7 +16,7 @@ jobs:
     - name: 读取当前版本
       id: version
       run: |
-        source version.sh
+        source VERSION
         echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_OUTPUT
         echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_OUTPUT
         echo "FULL_VERSION=v${VERSION}" >> $GITHUB_OUTPUT
@@ -26,8 +26,8 @@ jobs:
       id: increment_version
       run: |
         # 获取当前版本
-        VERSION_NAME=$(grep "^VERSION_NAME=" version.sh | cut -d= -f2)
-        OLD_BUILD=$(grep "^BUILD_NUMBER=" version.sh | cut -d= -f2)
+        source VERSION
+        OLD_BUILD=$BUILD_NUMBER
         BUILD_NUMBER=$((OLD_BUILD + 1))
         VERSION="${VERSION_NAME}+${BUILD_NUMBER}"
         
