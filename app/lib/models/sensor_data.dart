@@ -11,6 +11,7 @@ class SensorData {
   final double? nitrite;     // 修改为可为空
   final double? oxygen;      // 修改为可为空
   final double humidity;
+  final int battery;
   final DateTime timestamp;
   final DateTime createdAt;
   final String? status;
