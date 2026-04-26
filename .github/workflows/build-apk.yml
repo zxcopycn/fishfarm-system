@@ -13,6 +13,62 @@ jobs:
     - name: Checkout代码
       uses: actions/checkout@v4
     
+    - name: 读取当前版本
+      id: version
+      run: |
+        source version.sh
+        echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_OUTPUT
+        echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+        echo "FULL_VERSION=v${VERSION}" >> $GITHUB_OUTPUT
+        echo "📌 当前版本: v${VERSION}"
+    
+    - name: 递增版本号
+      id: increment_version
+      run: |
+        # 获取当前版本
+        VERSION_NAME=$(grep "^VERSION_NAME=" version.sh | cut -d= -f2)
+        OLD_BUILD=$(grep "^BUILD_NUMBER=" version.sh | cut -d= -f2)
+        BUILD_NUMBER=$((OLD_BUILD + 1))
+        VERSION="${VERSION_NAME}+${BUILD_NUMBER}"
+        
+        # 更新 VERSION 文件
+        cat > VERSION << 'VERSIONEOF'
+# 渔场系统版本管理
+# 格式: VERSION_NAME+BUILD_NUMBER
+# 示例: 1.0.2+3
+
+# 主版本号.次版本号.修订号
+VERSION_NAME=VERSION_NAME_REPLACE
+
+# 构建号 (每次构建递增)
+BUILD_NUMBER=BUILD_NUMBER_REPLACE
+
+# 完整版本字符串
+VERSION=VERSION_REPLACE
+
+# APK版本 (Android显示用，通常是 VERSION_NAME)
+APK_VERSION=VERSION_NAME_REPLACE
+
+# APK构建号 (Android显示用，通常是 BUILD_NUMBER)
+APK_BUILD=BUILD_NUMBER_REPLACE
+VERSIONEOF
+        
+        # 替换变量
+        sed -i "s/VERSION_NAME_REPLACE/$VERSION_NAME/" VERSION
+        sed -i "s/BUILD_NUMBER_REPLACE/$BUILD_NUMBER/" VERSION
+        sed -i "s/VERSION_REPLACE/$VERSION/" VERSION
+        sed -i "s/VERSION_NAME_REPLACE/$VERSION_NAME/" VERSION
+        
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        echo "✅ 版本号已更新: v${VERSION}"
+    
+    - name: 提交版本更新
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add VERSION
+        git commit -m "chore: 递增版本号到 v${{ steps.increment_version.outputs.VERSION }}"
+    
     - name: 设置Flutter环境
       uses: subosito/flutter-action@v2
       with:
@@ -32,10 +88,17 @@ jobs:
     - name: 上传APK
       uses: actions/upload-artifact@v4
       with:
-        name: fishfarm-app-release
+        name: fishfarm-app-release-v${{ steps.increment_version.outputs.VERSION }}
         path: app/build/app/outputs/flutter-apk/app-release.apk
+    
+    - name: 推送版本更新
+      run: |
+        git push origin main
     
     - name: 构建完成通知
       run: |
+        echo "========================================"
         echo "✅ APK构建完成！"
-        echo "📦 下载地址：在Actions页面下载artifact"
+        echo "📦 版本: v${{ steps.increment_version.outputs.VERSION }}"
+        echo "📥 下载: 在Actions页面下载 artifact"
+        echo "========================================"
