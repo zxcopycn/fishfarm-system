@@ -284,6 +284,39 @@ const server = http.createServer((req, res) => {
       return;
     }
 
+    // 更新设备信息 (支持更新设备名称)
+    if (pathname.startsWith('/api/devices/') && method === 'PUT') {
+      const deviceId = parseInt(pathname.split('/')[3]);
+      const device = mockData.devices.find(d => d.id === deviceId);
+      
+      if (!device) {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: '设备不存在' }));
+        return;
+      }
+
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', () => {
+        try {
+          const updateData = JSON.parse(body);
+          if (updateData.device_name) device.device_name = updateData.device_name;
+          if (updateData.location) device.location = updateData.location;
+          if (updateData.ip_address) device.ip_address = updateData.ip_address;
+          if (updateData.mqtt_topic) device.mqtt_topic = updateData.mqtt_topic;
+          if (updateData.status !== undefined) device.status = updateData.status;
+          device.updated_at = new Date().toISOString();
+          
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(device));
+        } catch (e) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: '无效的请求数据' }));
+        }
+      });
+      return;
+    }
+
     // 获取传感器数据
     if (pathname === '/api/sensor-data') {
       res.writeHead(200);
