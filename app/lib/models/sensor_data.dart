@@ -26,6 +26,7 @@ class SensorData {
     this.nitrite,
     this.oxygen,
     this.humidity = 0.0,
+    this.battery = 0,
     required this.timestamp,
     required this.createdAt,
     this.status,
@@ -43,7 +44,8 @@ class SensorData {
       ammonia: TypeConverters.safeDouble(json['ammonia']),
       nitrite: TypeConverters.safeDouble(json['nitrite']),
       oxygen: TypeConverters.safeDouble(json['oxygen']),
-      humidity: 0.0, // 后端没有提供此字段，使用默认值
+      humidity: TypeConverters.safeDouble(json['humidity']) ?? 0.0,
+      battery: TypeConverters.safeInt(json['battery']) ?? 0,
       timestamp: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
       createdAt: TypeConverters.safeDateTime(json['created_at']) ?? DateTime.now(),
       status: json['status']?.toString(),

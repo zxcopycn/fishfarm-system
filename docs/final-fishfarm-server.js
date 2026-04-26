@@ -105,6 +105,7 @@ const mockData = {
       device_id: 1,
       device_name: "温度传感器-1",
       temperature: 25.5,
+      humidity: 65.0,
       ph: 7.2,
       ammonia: 0.5,
       nitrite: 0.2,
@@ -116,6 +117,7 @@ const mockData = {
       device_id: 2,
       device_name: "PH传感器-1",
       temperature: 25.3,
+      humidity: 62.5,
       ph: 7.4,
       ammonia: 0.6,
       nitrite: 0.3,
@@ -127,6 +129,7 @@ const mockData = {
       device_id: 3,
       device_name: "溶氧传感器-1",
       temperature: 25.2,
+      humidity: 68.0,
       ph: 7.3,
       ammonia: 0.4,
       nitrite: 0.2,
@@ -138,6 +141,7 @@ const mockData = {
       device_id: 4,
       device_name: "氨氮传感器-1",
       temperature: 25.4,
+      humidity: 64.5,
       ph: 7.1,
       ammonia: 0.3,
       nitrite: 0.1,
@@ -149,6 +153,7 @@ const mockData = {
       device_id: 5,
       device_name: "亚硝酸盐传感器-1",
       temperature: 25.6,
+      humidity: 63.8,
       ph: 7.5,
       ammonia: 0.2,
       nitrite: 0.15,
@@ -328,6 +333,84 @@ const server = http.createServer((req, res) => {
       return;
     }
 
+    // BLE传感器数据接收 (POST)
+    if (pathname === '/api/ble-data' && method === 'POST') {
+      let body = '';
+      req.on('data', chunk => { body += chunk; });
+      req.on('end', () => {
+        try {
+          const data = JSON.parse(body);
+          console.log('[BLE数据接收]', new Date().toISOString(), data);
+          
+          // 更新传感器数据
+          const bleDevice = mockData.devices.find(d => d.id === data.device_id);
+          if (bleDevice) {
+            bleDevice.current_value = data.temperature;
+            bleDevice.updated_at = new Date().toISOString();
+          }
+          
+          // 添加到sensorData历史
+          const newRecord = {
+            id: mockData.sensorData.length + 1,
+            device_id: data.device_id,
+            device_name: bleDevice ? bleDevice.device_name : 'BLE传感器',
+            temperature: data.temperature,
+            humidity: data.humidity,
+            battery: data.battery,
+            ph: data.ph || null,
+            ammonia: data.ammonia || null,
+            nitrite: data.nitrite || null,
+            oxygen: data.oxygen || null,
+            created_at: new Date().toISOString()
+          };
+          mockData.sensorData.push(newRecord);
+          
+          // 低电量报警检查
+          if (data.battery && data.battery < 20) {
+            // 检查是否已有未解决的重试报警
+            const existingAlarm = mockData.alarms.find(
+              a => a.alarm_rule_name === '电量过低' && 
+                   a.device_id === data.device_id && 
+                   !a.is_resolved
+            );
+            
+            if (!existingAlarm) {
+              const lowBatteryAlarm = {
+                id: mockData.alarms.length + 1,
+                device_id: data.device_id,
+                device_name: bleDevice ? bleDevice.device_name : 'BLE传感器',
+                alarm_rule_id: 100,  // 专用规则ID
+                alarm_rule_name: '电量过低',
+                alarm_type: 'warning',
+                alarm_level: 'warning',
+                message: `BLE传感器电量过低 (${data.battery}%)`,
+                trigger_value: `${data.battery}%`,
+                threshold_value: '20%',
+                is_resolved: false,
+                resolved_at: null,
+                resolved_by: null,
+                created_at: new Date().toISOString()
+              };
+              mockData.alarms.push(lowBatteryAlarm);
+              console.log('[⚠️ 低电量报警]', data.battery + '%');
+            }
+          }
+          
+          res.writeHead(200);
+          res.end(JSON.stringify({ 
+            success: true, 
+            message: '数据接收成功',
+            id: newRecord.id 
+          }));
+        } catch (e) {
+          console.error('BLE数据处理错误:', e);
+          res.writeHead(400);
+          res.end(JSON.stringify({ success: false, message: '数据格式错误' }));
+        }
+      });
+      return;
+    }
+
     // 404
     res.writeHead(404);
     res.end(JSON.stringify({ error: 'Not Found', path: pathname }));
@@ -378,24 +461,26 @@ server.on('error', (error) => {
   }
 });
 
-// 定时更新传感器数据
-setInterval(() => {
-  mockData.sensorData.forEach(sensor => {
-    sensor.temperature = (20 + Math.random() * 15).toFixed(1);
-    sensor.ph = (6.5 + Math.random() * 2).toFixed(1);
-    sensor.ammonia = (0.1 + Math.random() * 1).toFixed(2);
-    sensor.nitrite = (0.05 + Math.random() * 0.5).toFixed(2);
-    sensor.oxygen = (7 + Math.random() * 2).toFixed(1);
-    sensor.created_at = new Date().toISOString();
-  });
-
-  mockData.devices.forEach(device => {
-    const sensorData = mockData.sensorData.find(s => s.device_id === device.id);
-    if (sensorData) {
-      device.current_value = parseFloat(sensorData.temperature);
-    }
-    device.updated_at = new Date().toISOString();
-  });
-}, 30000);
+// 定时更新传感器数据 - 已禁用
+// 注意：真实数据由BLE采集程序通过 /api/ble-data 上报
+// setInterval(() => {
+//   mockData.sensorData.forEach(sensor => {
+//     sensor.temperature = (20 + Math.random() * 15).toFixed(1);
+//     sensor.ph = (6.5 + Math.random() * 2).toFixed(1);
+//     sensor.ammonia = (0.1 + Math.random() * 1).toFixed(2);
+//     sensor.nitrite = (0.05 + Math.random() * 0.5).toFixed(2);
+//     sensor.oxygen = (7 + Math.random() * 2).toFixed(1);
+//     sensor.created_at = new Date().toISOString();
+//   });
+// 
+//   mockData.devices.forEach(device => {
+//     const sensorData = mockData.sensorData.find(s => s.device_id === device.id);
+//     if (sensorData) {
+//       device.current_value = parseFloat(sensorData.temperature);
+//     }
+//     device.updated_at = new Date().toISOString();
+//   });
+// }, 30000);
 
 console.log('✅ 服务器配置完成，等待连接...');
+console.log('📡 真实数据由BLE采集程序通过 POST /api/ble-data 上报');

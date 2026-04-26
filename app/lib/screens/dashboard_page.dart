@@ -290,6 +290,10 @@ class _DashboardPageState extends State<DashboardPage> {
               children: [
                 if (data.temperature != null)
                   _buildSensorRow('温度', '${data.temperature!.toStringAsFixed(1)}℃'),
+                if (data.humidity > 0)
+                  _buildSensorRow('湿度', '${data.humidity.toStringAsFixed(1)}%'),
+                if (data.battery > 0)
+                  _buildSensorRow('电量', '${data.battery}%', isAlarm: data.battery < 20),
                 if (data.ph != null)
                   _buildSensorRow('PH值', '${data.ph!.toStringAsFixed(1)}'),
                 if (data.ammonia != null)
@@ -310,7 +314,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildSensorRow(String label, String value) {
+  Widget _buildSensorRow(String label, String value, {bool isAlarm = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -322,7 +326,10 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           Text(
             value,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: isAlarm ? Colors.red : null,
+            ),
           ),
         ],
       ),
