@@ -25,42 +25,29 @@ jobs:
     - name: 递增版本号
       id: increment_version
       run: |
-        # 获取当前版本
         source VERSION
         OLD_BUILD=$BUILD_NUMBER
         BUILD_NUMBER=$((OLD_BUILD + 1))
         VERSION="${VERSION_NAME}+${BUILD_NUMBER}"
         
-        # 更新 VERSION 文件
-        cat > VERSION << 'VERSIONEOF'
-# 渔场系统版本管理
-# 格式: VERSION_NAME+BUILD_NUMBER
-# 示例: 1.0.2+3
-
-# 主版本号.次版本号.修订号
-VERSION_NAME=VERSION_NAME_REPLACE
-
-# 构建号 (每次构建递增)
-BUILD_NUMBER=BUILD_NUMBER_REPLACE
-
-# 完整版本字符串
-VERSION=VERSION_REPLACE
-
-# APK版本 (Android显示用，通常是 VERSION_NAME)
-APK_VERSION=VERSION_NAME_REPLACE
-
-# APK构建号 (Android显示用，通常是 BUILD_NUMBER)
-APK_BUILD=BUILD_NUMBER_REPLACE
-VERSIONEOF
-        
-        # 替换变量
-        sed -i "s/VERSION_NAME_REPLACE/$VERSION_NAME/" VERSION
-        sed -i "s/BUILD_NUMBER_REPLACE/$BUILD_NUMBER/" VERSION
-        sed -i "s/VERSION_REPLACE/$VERSION/" VERSION
-        sed -i "s/VERSION_NAME_REPLACE/$VERSION_NAME/" VERSION
+        # 写入VERSION文件（使用printf避免heredoc问题）
+        printf '# 渔场系统版本管理\n' > VERSION
+        printf '# 格式: VERSION_NAME+BUILD_NUMBER\n' >> VERSION
+        printf '# 示例: 1.0.2+3\n\n' >> VERSION
+        printf '# 主版本号.次版本号.修订号\n' >> VERSION
+        printf 'VERSION_NAME=%s\n' "$VERSION_NAME" >> VERSION
+        printf '# 构建号 (每次构建递增)\n' >> VERSION
+        printf 'BUILD_NUMBER=%s\n' "$BUILD_NUMBER" >> VERSION
+        printf '# 完整版本字符串\n' >> VERSION
+        printf 'VERSION=%s\n' "$VERSION" >> VERSION
+        printf '# APK版本 (Android显示用，通常是 VERSION_NAME)\n' >> VERSION
+        printf 'APK_VERSION=%s\n' "$VERSION_NAME" >> VERSION
+        printf '# APK构建号 (Android显示用，通常是 BUILD_NUMBER)\n' >> VERSION
+        printf 'APK_BUILD=%s\n' "$BUILD_NUMBER" >> VERSION
         
         echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
         echo "✅ 版本号已更新: v${VERSION}"
+        cat VERSION
     
     - name: 提交版本更新
       run: |
@@ -73,7 +60,6 @@ VERSIONEOF
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.24.5'
-        channel: 'stable'
     
     - name: 安装依赖
       run: |
