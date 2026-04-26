@@ -202,6 +202,12 @@ class _DashboardPageState extends State<DashboardPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.edit, color: Colors.blue, size: 20),
+                  tooltip: '编辑设备名称',
+                  onPressed: _showDeviceListDialog,
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -343,5 +349,158 @@ class _DashboardPageState extends State<DashboardPage> {
         const SnackBar(content: Text('已刷新数据')),
       );
     }
+  }
+
+  void _showEditDeviceDialog(Device device) {
+    final nameController = TextEditingController(text: device.deviceName);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('编辑设备名称'),
+        content: TextField(
+          controller: nameController,
+          decoration: const InputDecoration(
+            labelText: '设备名称',
+            hintText: '请输入设备名称',
+            border: OutlineInputBorder(),
+          ),
+          autofocus: true,
+          maxLength: 50,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('取消'),
+          ),
+          ElevatedButton(
+            onPressed: () => _updateDeviceName(device.id, nameController.text, device),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('保存'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _updateDeviceName(int deviceId, String newName, Device oldDevice) async {
+    if (newName.trim().isEmpty) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('设备名称不能为空'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    if (newName == oldDevice.deviceName) {
+      Navigator.pop(context);
+      return;
+    }
+
+    try {
+      final updatedDevice = await ApiService().updateDevice(
+        deviceId: deviceId,
+        deviceName: newName.trim(),
+      );
+
+      Navigator.pop(context);
+
+      setState(() {
+        final index = _devices.indexWhere((d) => d.id == deviceId);
+        if (index != -1) {
+          _devices[index] = Device(
+            id: oldDevice.id,
+            deviceName: updatedDevice.deviceName,
+            deviceTypeId: oldDevice.deviceTypeId,
+            deviceTypeName: oldDevice.deviceTypeName,
+            location: oldDevice.location,
+            ipAddress: oldDevice.ipAddress,
+            mqttTopic: oldDevice.mqttTopic,
+            status: oldDevice.status,
+            currentValue: oldDevice.currentValue,
+            createdAt: oldDevice.createdAt,
+          );
+        }
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text('设备名称已更新为: $newName'),
+                ),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.all(16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('更新失败: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  void _showDeviceListDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('选择要编辑的设备'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: _devices.isEmpty
+              ? const Text('暂无可编辑的设备')
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _devices.length,
+                  itemBuilder: (context, index) {
+                    final device = _devices[index];
+                    return ListTile(
+                      leading: Icon(
+                        device.status == 1 ? Icons.cloud_done : Icons.cloud_off,
+                        color: device.status == 1 ? Colors.green : Colors.red,
+                      ),
+                      title: Text(device.deviceName),
+                      subtitle: Text(device.deviceTypeName ?? '未知类型'),
+                      trailing: const Icon(Icons.edit, color: Colors.blue),
+                      onTap: () {
+                        Navigator.pop(context);
+                        _showEditDeviceDialog(device);
+                      },
+                    );
+                  },
+                ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('关闭'),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -206,6 +206,118 @@ class _ControlPageState extends State<ControlPage> {
     }
   }
 
+  void _showEditDeviceDialog(ControlDevice device) {
+    final nameController = TextEditingController(text: device.deviceName);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('编辑设备名称'),
+        content: TextField(
+          controller: nameController,
+          decoration: const InputDecoration(
+            labelText: '设备名称',
+            hintText: '请输入设备名称',
+            border: OutlineInputBorder(),
+          ),
+          autofocus: true,
+          maxLength: 50,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('取消'),
+          ),
+          ElevatedButton(
+            onPressed: () => _updateDeviceName(device.id, nameController.text, device),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('保存'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _updateDeviceName(int deviceId, String newName, ControlDevice oldDevice) async {
+    if (newName.trim().isEmpty) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('设备名称不能为空'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    if (newName == oldDevice.deviceName) {
+      Navigator.pop(context);
+      return;
+    }
+
+    try {
+      final updatedDevice = await ApiService().updateDevice(
+        deviceId: deviceId,
+        deviceName: newName.trim(),
+      );
+
+      Navigator.pop(context);
+
+      setState(() {
+        final index = _devices.indexWhere((d) => d.id == deviceId);
+        if (index != -1) {
+          _devices[index] = ControlDevice(
+            id: oldDevice.id,
+            deviceName: updatedDevice.deviceName,
+            deviceType: oldDevice.deviceType,
+            location: oldDevice.location,
+            status: oldDevice.status,
+            mqttTopic: oldDevice.mqttTopic,
+            currentPower: oldDevice.currentPower,
+            createdAt: oldDevice.createdAt,
+            updatedAt: DateTime.now(),
+          );
+        }
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text('设备名称已更新为: $newName'),
+                ),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.all(16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('更新失败: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,10 +457,20 @@ class _ControlPageState extends State<ControlPage> {
                 ),
               ],
             ),
-            trailing: Switch(
-              value: isOn,
-               onChanged: (value) => _toggleDevice(device),
-              activeColor: Colors.green,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit, color: Colors.blue),
+                  tooltip: '编辑设备名称',
+                  onPressed: () => _showEditDeviceDialog(device),
+                ),
+                Switch(
+                  value: isOn,
+                  onChanged: (value) => _toggleDevice(device),
+                  activeColor: Colors.green,
+                ),
+              ],
             ),
             onTap: () => _toggleDevice(device),
           ),

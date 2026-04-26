@@ -277,6 +277,41 @@ class ApiService {
     }
   }
 
+  // 更新设备信息（支持更新设备名称）
+  Future<Device> updateDevice({
+    required int deviceId,
+    String? deviceName,
+    String? location,
+    String? ipAddress,
+    String? mqttTopic,
+    int? status,
+  }) async {
+    try {
+      final data = <String, dynamic>{};
+      if (deviceName != null) data['device_name'] = deviceName;
+      if (location != null) data['location'] = location;
+      if (ipAddress != null) data['ip_address'] = ipAddress;
+      if (mqttTopic != null) data['mqtt_topic'] = mqttTopic;
+      if (status != null) data['status'] = status;
+
+      final response = await _dio!.put(
+        '/api/devices/$deviceId',
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        dynamic responseData = response.data;
+        if (responseData is Map<String, dynamic>) {
+          responseData = responseData['data'] ?? responseData;
+        }
+        return Device.fromJson(responseData);
+      }
+      throw Exception('更新设备失败');
+    } catch (e) {
+      throw Exception('更新设备失败: $e');
+    }
+  }
+
   // 获取预警规则
   Future<List<AlarmRule>> getAlarmRules() async {
     try {
